@@ -59,7 +59,10 @@ public class LibgdxTest extends ApplicationAdapter {
 	Person Person1 = new Person(stage);
 	level.PersonGroup.addActor(Person1);
 	
-	objectCreator.createObject(1, 1, 1);
+	objectCreator.createObject(3, 3, 1);
+	objectCreator.createObject(8, 3, 1);
+	objectCreator.createObject(3, 8, 1);
+	objectCreator.createObject(3, 7, 1);
 	
 	
 

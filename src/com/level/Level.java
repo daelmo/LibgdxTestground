@@ -13,8 +13,8 @@ public class Level {
     public Tile[][] GameMap;
     public Group MapGroup = new Group();
 
-    public static final int LEVEL_HEIGHT = 32;
-    public static final int LEVEL_WIDTH = 32;
+    public static final int LEVEL_HEIGHT = 10;
+    public static final int LEVEL_WIDTH = 10;
     public static final int FLOOR_ZINDEX = 0;
     public static final int FURNITURE_ZINDEX = 1;
     public static final int OBJECT_ZINDEX = 2;
