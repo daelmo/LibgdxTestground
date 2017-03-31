@@ -4,6 +4,8 @@ For the implementation using Java and the game engine libGDX.
 
 ## Implemented Features
 * level generation
+* zooming in and out with range
+* camera shift with arrow keys
 * random character synthesis for 4 viewpoints
 * object placement on level grit
 
