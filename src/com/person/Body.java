@@ -53,7 +53,7 @@ public class Body {
 			variants[bodyPart] = random.nextInt(variantCounts[bodyPart]);
 			bodyColor[bodyPart] = possibleColor[random.nextInt(2)][bodyPart]; // clothing color
 		}
-		
+
 		//setting hand = skin color
 		bodyColor[1] = bodyColor[2];
 	}
