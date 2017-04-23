@@ -1,10 +1,5 @@
 package com.event;
 
-
-/**
- *
- * @author fine
- */
 public class Timer {
 	double time=0;
 

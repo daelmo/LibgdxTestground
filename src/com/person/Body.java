@@ -7,10 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import java.util.Random;
 
-/**
- *
- * @author fine
- */
 public class Body {
 
 	private static Sprite[][][] sprites = null;
