@@ -5,9 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.level.Level;
 import com.object.StaticObject;
 
-/**
- * @author fine
- */
 public class ObjectCreator {
 	Level level;
 	Stage stage;

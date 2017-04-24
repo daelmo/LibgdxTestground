@@ -18,6 +18,7 @@ public class Person extends Actor {
 	private Body body;
 	public ViewDir view;
 	private Stage stage;
+	public State state;
 
 	public Person(Stage stage) {
 		body = new Body();
@@ -33,6 +34,6 @@ public class Person extends Actor {
 	}
 	
 	public void act(){
-		
+		state.goNext();
 	}
 }
