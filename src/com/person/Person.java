@@ -10,19 +10,19 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
  */
 public class Person extends Actor {
 
-	public enum ViewDir {
-		down, left, top, right;
+	public enum ViewDirection {
+		down, left, top, right
 	}
 	
 	private Statistic statistic;
 	private Body body;
-	public ViewDir view;
+	public ViewDirection view;
 	private Stage stage;
 	public State state;
 
 	public Person(Stage stage) {
 		body = new Body();
-		view = ViewDir.left;
+		view = ViewDirection.left;
 		this.stage = stage;
 		this.stage.addActor(this);
 	}

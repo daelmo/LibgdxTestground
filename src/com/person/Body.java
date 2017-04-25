@@ -55,7 +55,7 @@ public class Body {
 	}
 
 	private static void initSprites() {
-		int viewDirLength = Person.ViewDir.values().length;
+		int viewDirLength = Person.ViewDirection.values().length;
 		sprites = new Sprite[bodyPartCount][][]; // [Körperteil][Variante][Richtung]
 		for (int bPart = 0; bPart < bodyPartCount; bPart++) {
 			sprites[bPart] = new Sprite[variantCounts[bPart]][viewDirLength];
@@ -68,7 +68,7 @@ public class Body {
 		}
 	}
 
-	public void draw(Batch batch, float alpha, Person.ViewDir view) {
+	public void draw(Batch batch, float alpha, Person.ViewDirection view) {
 		for (int bPart = 0; bPart < bodyPartCount; bPart++) {
 			Sprite s = sprites[bPart][variants[bPart]][view.ordinal()];
 			s.setColor(bodyColor[bPart]);
