@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.event.Timer;
+import com.event.TimeController;
 import com.level.Level;
 import com.object.ObjectCreator;
 import com.person.Person;
@@ -25,12 +25,15 @@ public class LibgdxTest extends ApplicationAdapter {
 	public InputMultiplexer multiplexer;
 	public customScreenViewport viewport;
 	public ObjectCreator objectCreator;
-	public boolean gamePaused = false;
 	public OrthographicCamera camera;
-	public Timer timer = new Timer();
+
+	//start settings
+	public TimeController timer = new TimeController(TimeController.Season.spring);
+	public boolean gamePaused = false;
+
+	// read settings file
 	Properties prop = new Properties();
 	InputStream input = null;
-	OutputStream output = null;
 
 	@Override
 	public void create() {
