@@ -4,10 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-
-/**
- * @author fine
- */
 public class Person extends Actor {
 
 	public enum ViewDirection {
@@ -18,13 +14,14 @@ public class Person extends Actor {
 	private Body body;
 	public ViewDirection view;
 	private Stage stage;
-	public State state;
+	private State state;
 
 	public Person(Stage stage) {
-		body = new Body();
-		view = ViewDirection.left;
+		this.body = new Body();
+		this.view = ViewDirection.left;
 		this.stage = stage;
 		this.stage.addActor(this);
+		this.statistic = new Statistic(this);
 	}
 
 	@Override
@@ -32,8 +29,14 @@ public class Person extends Actor {
 		body.draw(batch, alpha, view);
 
 	}
-	
-	public void act(){
-		state.goNext();
+
+	@Override
+	public void act(float delta){
+		statistic.update(delta);
 	}
+
+	public void setState(State state){
+		this.state = state;
+	}
+
 }
