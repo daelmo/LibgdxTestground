@@ -17,11 +17,9 @@ public class Date {
 		if(day++ <= DAYS_PER_SEASON){
 			return new Date(year, season, day++);
 		}
-
 		if(season.ordinal() + 1 <= TimeController.Season.values().length){
 			return new Date(year, TimeController.Season.values()[season.ordinal() + 1], 1);
 		}
-
 		return new Date(year++, TimeController.Season.spring, 1);
 	}
 

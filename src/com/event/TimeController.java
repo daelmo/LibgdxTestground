@@ -13,7 +13,7 @@ public class TimeController {
 	public float currentSeconds;
 
 	public TimeController(Season season){
-		this.currentDate = new Date(0, season, 1);
+		this.currentDate = new Date(1, season, 1);
 		this.currentSeconds = 0;
 	}
 
@@ -24,10 +24,6 @@ public class TimeController {
 			currentDate = currentDate.getNextDate();
 			currentSeconds = currentSeconds % SECONDS_PER_DAY;
 		}
-	}
-
-	public double getAbsoluteTime(){
-		return absoluteTime;
 	}
 
 }
