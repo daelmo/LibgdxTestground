@@ -3,9 +3,6 @@ package com.level;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-/**
- * @author fine
- */
 public class Level {
 
 	private static Level instance = null;
@@ -15,13 +12,14 @@ public class Level {
 	public static final int FLOOR_ZINDEX = 0;
 	public static final int FURNITURE_ZINDEX = 1;
 	public static final int OBJECT_ZINDEX = 2;
+	public static final int BACKGROUND_ZINDEX = 3;
 	public Group PersonGroup = new Group();
 
 	protected Level(int size) {
 		GameMap = new Tile[size][size];
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
-				Tile t = new Tile(x, y, 3);
+				Tile t = new Tile(x, y, BACKGROUND_ZINDEX);
 				GameMap[x][y] = t;
 				MapGroup.addActor(t);
 			}
