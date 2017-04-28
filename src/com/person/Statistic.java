@@ -19,7 +19,7 @@ public class Statistic {
 
 
 	public void update( float delta){
-		takeDamage( delta * 1);
+		takeDamage( delta * 3);
 	}
 
 	public void takeDamage(float damage){

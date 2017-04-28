@@ -68,11 +68,12 @@ public class Body {
 		}
 	}
 
-	public void draw(Batch batch, float alpha, Person.ViewDirection view) {
+	public void draw(Batch batch, float alpha, Person.ViewDirection view, float rotation) {
 		for (int bPart = 0; bPart < bodyPartCount; bPart++) {
 			Sprite s = sprites[bPart][variants[bPart]][view.ordinal()];
 			s.setColor(bodyColor[bPart]);
 			s.setPosition(30, 30);
+			s.setRotation(rotation);
 			s.draw(batch);
 		}
 	}
