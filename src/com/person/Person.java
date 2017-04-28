@@ -36,11 +36,13 @@ public class Person extends Actor {
 		}
 		if (state.getClass() == StateUnconscious.class){
 			rot = (rot + Gdx.graphics.getDeltaTime() * 5f);
-			body.draw(batch, alpha, view, 90f + MathUtils.sin(rot) * shakeAmplitude);
+			view = ViewDirection.left;
+			body.draw(batch, alpha, view, -90f + MathUtils.sin(rot) * shakeAmplitude);
 		}
 		if (state.getClass() == StateDead.class){
 			rot = (rot + Gdx.graphics.getDeltaTime() * 5f);
-			body.draw(batch, alpha, view, 90f);
+			view = ViewDirection.left;
+			body.draw(batch, alpha, view, -90f);
 		}
 	}
 
