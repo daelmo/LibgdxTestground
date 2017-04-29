@@ -28,10 +28,10 @@ public class Statistic {
 
 	public void takeDamage(float damage){
 		health -= damage;
-		if(health < UNCONSCIOUS){
+		if(health < UNCONSCIOUS && person.getState() != State.unconscious){
 			person.setState(State.unconscious);
 		}
-		if(health < DEAD){
+		if(health < DEAD && person.getState() != State.dead){
 			person.setState(State.dead);
 		}
 	}

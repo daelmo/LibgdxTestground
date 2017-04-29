@@ -53,4 +53,8 @@ public class Person extends Actor {
 		this.state = state;
 	}
 
+	public State getState(){
+		return state;
+	}
+
 }
