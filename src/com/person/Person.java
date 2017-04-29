@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.event.TimeController;
 
 public class Person extends Actor {
 	private Statistic statistic;
@@ -14,14 +15,16 @@ public class Person extends Actor {
 	private State state;
 	private final float shakeAmplitude = 5.0f;
 	private float rot = 0;
+	private TimeController timeController;
 
-	public Person(Stage stage) {
+	public Person(Stage stage, TimeController timeController) {
 		this.body = new Body();
 		this.view = ViewDirection.left;
 		this.stage = stage;
 		this.stage.addActor(this);
-		this.statistic = new Statistic(this);
+		this.statistic = new Statistic(this, timeController);
 		this.state = State.active;
+		this.timeController = timeController;
 	}
 
 	@Override

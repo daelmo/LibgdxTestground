@@ -1,5 +1,6 @@
 package com.person;
-import java.util.Date;
+import com.event.Date;
+import com.event.TimeController;
 
 public class Statistic {
 	private Person person;
@@ -8,13 +9,16 @@ public class Statistic {
 	public Date birthday;
 	private int speedWalking;
 	private float health = 100;
+	private TimeController timeController;
+
 
 	private static final float FULLHEALTH = 100;
 	private static final float UNCONSCIOUS = 35;
 	private static final float DEAD = 0;
 
-	public Statistic(Person person){
+	public Statistic(Person person, TimeController timeController){
 		this.person = person;
+		this.birthday = timeController.generateBirthday(17);
 	}
 
 

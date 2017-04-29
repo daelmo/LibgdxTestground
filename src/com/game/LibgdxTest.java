@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.event.Season;
 import com.event.TimeController;
 import com.level.Level;
 import com.object.ObjectCreator;
@@ -28,7 +29,7 @@ public class LibgdxTest extends ApplicationAdapter {
 	public OrthographicCamera camera;
 
 	//start settings
-	public TimeController timer = new TimeController(TimeController.Season.spring);
+	public TimeController timeController = new TimeController(Season.spring);
 	public boolean gamePaused = false;
 
 	// read settings file
@@ -82,7 +83,7 @@ public class LibgdxTest extends ApplicationAdapter {
 
 
 		// To test
-		Person Person1 = new Person(stage);
+		Person Person1 = new Person(stage, timeController);
 		level.PersonGroup.addActor(Person1);
 
 		objectCreator.createObject(3, 3, 1);
@@ -143,7 +144,7 @@ public class LibgdxTest extends ApplicationAdapter {
 	private void handleTimer(float deltaTime) {
 		if (gamePaused == false) {
 			stage.act();
-			timer.addTime(deltaTime);
+			timeController.addTime(deltaTime);
 		}
 	}
 
