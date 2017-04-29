@@ -7,11 +7,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Person extends Actor {
-
-	public enum ViewDirection {
-		down, left, top, right
-	}
-	
 	private Statistic statistic;
 	private Body body;
 	public ViewDirection view;
@@ -26,20 +21,20 @@ public class Person extends Actor {
 		this.stage = stage;
 		this.stage.addActor(this);
 		this.statistic = new Statistic(this);
-		this.state = new StateActive();
+		this.state = State.active;
 	}
 
 	@Override
 	public void draw(Batch batch, float alpha) {
-		if(state.getClass() == StateActive.class){
+		if(state == State.active){
 			body.draw(batch, alpha, view, 0f);
 		}
-		if (state.getClass() == StateUnconscious.class){
+		if (state == State.unconscious){
 			rot = (rot + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
 			body.draw(batch, alpha, view, -90f + MathUtils.sin(rot) * shakeAmplitude);
 		}
-		if (state.getClass() == StateDead.class){
+		if (state == State.dead){
 			rot = (rot + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
 			body.draw(batch, alpha, view, -90f);

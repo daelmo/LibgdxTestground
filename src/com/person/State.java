@@ -1,8 +1,6 @@
 package com.person;
 
-public abstract class State {
-	public void goNext(){
-
-	}
+public enum State {
+	unconscious, dead, active, sleeping
 
 }
