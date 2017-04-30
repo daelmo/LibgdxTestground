@@ -1,26 +1,23 @@
 package com.person;
 import com.event.Date;
-import com.event.TimeController;
 
 public class Statistic {
 	private Person person;
 
 	public String name;
 	public Date birthday;
-	private int speedWalking;
+	private int walkingSpeed;
 	private float health = 100;
-	private TimeController timeController;
 
 
 	private static final float FULLHEALTH = 100;
 	private static final float UNCONSCIOUS = 35;
 	private static final float DEAD = 0;
 
-	public Statistic(Person person, TimeController timeController){
+	public Statistic(Person person, Date birthday){
 		this.person = person;
-		this.birthday = timeController.generateBirthday(17);
+		this.birthday = birthday;
 	}
-
 
 	public void update( float delta){
 		takeDamage( delta * 3);
@@ -28,10 +25,10 @@ public class Statistic {
 
 	public void takeDamage(float damage){
 		health -= damage;
-		if(health < UNCONSCIOUS){
+		if(health < UNCONSCIOUS && person.getState() != State.unconscious){
 			person.setState(State.unconscious);
 		}
-		if(health < DEAD){
+		if(health < DEAD && person.getState() != State.dead){
 			person.setState(State.dead);
 		}
 	}

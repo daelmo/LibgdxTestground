@@ -24,7 +24,7 @@ public class Body {
 
 
 
-	public Body() {
+	public Body(PersonGrowth growth) {
 		possibleColor = new Color[2][4];
 		possibleColor[0][0] = Color.RED; // clothing color
 		possibleColor[0][1] = Color.BROWN; // head skin
