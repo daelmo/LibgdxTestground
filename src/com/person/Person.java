@@ -1,5 +1,8 @@
 package com.person;
 
+import com.action.Action;
+import com.action.ActiveScheduler;
+import com.action.Scheduler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -7,78 +10,78 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Date;
 import com.event.TimeController;
+import com.level.Position;
 
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Person extends Actor {
-	private Statistic statistic;
+	public String name;
+	public Date birthday;
+	private Position position;
 	private Body body;
 	public ViewDirection view;
-	private Stage stage;
 	private State state;
+	private Statistic statistic;
+	private PersonGrowth growth;
+	private Stage stage;
+	private Scheduler scheduler;
 	private final float shakeAmplitude = 5.0f;
 	private float rotation = 0;
-	private PersonGrowth growth;
+	private ArrayList<Action> actions;
 
-	private Person(Stage stage, Date birthday, PersonGrowth growth) {
+
+	private Person(Stage stage, PersonGrowth growth) {
 		this.stage = stage;
+		this.position = position;
 		this.stage.addActor(this);
 		this.growth = growth;
 		this.body = new Body(growth);
 		this.view = ViewDirection.left;
-		this.statistic = new Statistic(this, birthday);
+		this.statistic = new Statistic(this);
 		this.state = State.active;
+		this.actions = new ArrayList<Action>();
 	}
 
 	public static Person generatePerson(Stage stage, TimeController timeController, PersonGrowth growth){
-		int min, max;
-		switch (growth){
-			case baby:
-				min = 0;
-				max = 4;
-				break;
-			case kid:
-				min = 5;
-				max = 14;
-				break;
-			case teenager:
-				min = 15;
-				max = 20;
-				break;
-			default:
-				min = 20;
-				max = 56;
-		}
-		Random rand = new Random();
-		int age = rand.nextInt((max - min) + 1) + min;
-		Date birthday = timeController.generateBirthday(age);
-
-
-
-		return new Person(stage, birthday, growth);
+		Person person = new Person(stage, growth);
+		person.setBirthday(timeController.generateBirthday(PersonGrowth.adult));
+		person.setPosition(new Position(30,30));
+		person.scheduler = new ActiveScheduler();
+		return person;
 	}
 
+	private void setBirthday(Date birthday){
+		this.birthday = birthday;
+	}
+
+	public void setPosition(Position position){
+		this.position = position;
+	}
 
 
 	@Override
 	public void draw(Batch batch, float alpha) {
 		if(state == State.active){
-			body.draw(batch, alpha, view, 0f);
+			body.draw(batch, alpha, position, view, 0f);
 		}
 		if (state == State.unconscious){
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
-			body.draw(batch, alpha, view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
+			body.draw(batch, alpha, position,  view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
 		}
 		if (state == State.dead){
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
-			body.draw(batch, alpha, view, -90f);
+			body.draw(batch, alpha, position, view, -90f);
 		}
 	}
 
 	@Override
 	public void act(float delta){
+		if(actions.isEmpty()){
+			actions.add(scheduler.getAction(this));
+		}
+		actions.get(0).execute();
 		statistic.update(delta);
 	}
 
@@ -89,5 +92,6 @@ public class Person extends Actor {
 	public State getState(){
 		return state;
 	}
+
 
 }

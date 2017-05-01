@@ -1,7 +1,12 @@
 package com.action;
 
-public class ActiveScheduler {
- public Action getAction(){
-  return new Action("Laufen");
- }
+import com.level.Position;
+import com.person.Person;
+
+public class ActiveScheduler implements Scheduler {
+
+	public Action getAction(Person person) {
+  		Position position = new Position(40,40);
+		return new Action(person, position);
+	}
 }
