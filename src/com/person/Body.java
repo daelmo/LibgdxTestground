@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.level.Position;
+
 import java.util.Random;
 
 public class Body {
@@ -68,11 +70,11 @@ public class Body {
 		}
 	}
 
-	public void draw(Batch batch, float alpha, ViewDirection view, float rotation) {
+	public void draw(Batch batch, float alpha, Position position, ViewDirection view, float rotation) {
 		for (int bPart = 0; bPart < bodyPartCount; bPart++) {
 			Sprite s = sprites[bPart][variants[bPart]][view.ordinal()];
 			s.setColor(bodyColor[bPart]);
-			s.setPosition(30, 30);
+			s.setPosition(position.getFloatX(), position.getFloatY());
 			s.setRotation(rotation);
 			s.draw(batch);
 		}

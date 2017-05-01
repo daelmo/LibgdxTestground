@@ -3,9 +3,6 @@ import com.event.Date;
 
 public class Statistic {
 	private Person person;
-
-	public String name;
-	public Date birthday;
 	private int walkingSpeed;
 	private float health = 100;
 
@@ -14,9 +11,8 @@ public class Statistic {
 	private static final float UNCONSCIOUS = 35;
 	private static final float DEAD = 0;
 
-	public Statistic(Person person, Date birthday){
+	public Statistic(Person person){
 		this.person = person;
-		this.birthday = birthday;
 	}
 
 	public void update( float delta){
