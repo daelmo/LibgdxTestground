@@ -1,5 +1,7 @@
 package com.event;
 
+import com.person.PersonGrowth;
+
 import java.util.Random;
 
 import static com.event.Date.SECONDS_PER_DAY;
@@ -23,11 +25,30 @@ public class TimeController {
 		}
 	}
 
-	public Date generateBirthday(int year){
+	public Date generateBirthday(PersonGrowth growth){
 		Random rn = new Random();
+		int min, max;
+		switch (growth){
+			case baby:
+				min = 0;
+				max = 4;
+				break;
+			case kid:
+				min = 5;
+				max = 14;
+				break;
+			case teenager:
+				min = 15;
+				max = 20;
+				break;
+			default:
+				min = 20;
+				max = 56;
+		}
+		int age = rn.nextInt((max - min) + 1) + min;
 		int birthDay = rn.nextInt((Date.DAYS_PER_SEASON - 1) + 0) + 1;
 		int birthSeason = rn.nextInt ((Date.SEASONS_PER_YEAR -1) +0) +1;
-		int birthYear = currentDate.year - year;
+		int birthYear = currentDate.year - age;
 		return new Date(birthYear, birthSeason, birthDay);
 	}
 
