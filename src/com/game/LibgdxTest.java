@@ -84,7 +84,7 @@ public class LibgdxTest extends ApplicationAdapter {
 
 
 		// To test
-		Person Person1 = Person.generatePerson(stage, timeController, PersonGrowth.adult);
+		Person Person1 = Person.generatePerson(stage, timeController, PersonGrowth.ADULT);
 		level.PersonGroup.addActor(Person1);
 
 		objectCreator.createObject(3, 3, 1);

@@ -44,7 +44,7 @@ public class Person extends Actor {
 
 	public static Person generatePerson(Stage stage, TimeController timeController, PersonGrowth growth){
 		Person person = new Person(stage, growth);
-		person.setBirthday(timeController.generateBirthday(PersonGrowth.adult));
+		person.setBirthday(timeController.generateBirthday(growth));
 		person.setPosition(new Position(30,30));
 		person.scheduler = new ActiveScheduler();
 		return person;
