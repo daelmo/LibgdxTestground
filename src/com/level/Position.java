@@ -24,5 +24,25 @@ public class Position {
 	public float getFloatY(){
 		return Y;
 	}
-	
+
+	public void setFloatX(float X){
+		this.X = X;
+	}
+
+	public void setFloatY(float Y){
+		this.X = Y;
+	}
+
+	public void addFloatX(float X){
+		this.X += X;
+	}
+
+	public void addFloatY(float Y){
+		this.Y += Y;
+	}
+
+	@Override
+	public String toString(){
+		return this.X + " " + this.Y;
+	}
 }

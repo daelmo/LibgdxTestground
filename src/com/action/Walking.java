@@ -13,7 +13,13 @@ public class Walking implements Action{
 	}
 
 	public void execute(){
+		float wholeX,wholeY, stepX, stepY;
 
+		wholeX= goalPosition.getFloatX() - person.getPosition().getFloatX();
+		wholeY= goalPosition.getFloatY() - person.getPosition().getFloatY();
+		stepX = Math.min(wholeX , person.statistic.walkingSpeed);
+		stepY = Math.min(wholeY , person.statistic.walkingSpeed);
+		person.movePosition(stepX, stepY);
 	}
 
 	public boolean checkCondition(){

@@ -3,13 +3,13 @@ import com.event.Date;
 
 public class Statistic {
 	private Person person;
-	private int walkingSpeed;
-	private float health = 100;
+	public float walkingSpeed = 1f;
+	public float health = 100;
 
 
-	private static final float FULLHEALTH = 100;
-	private static final float UNCONSCIOUS = 35;
-	private static final float DEAD = 0;
+	public static final float FULLHEALTH = 100;
+	public static final float UNCONSCIOUS = 35;
+	public static final float DEAD = 0;
 
 	public Statistic(Person person){
 		this.person = person;

@@ -21,7 +21,7 @@ public class Person extends Actor {
 	private Body body;
 	public ViewDirection view;
 	private State state;
-	private Statistic statistic;
+	public Statistic statistic;
 	private PersonGrowth growth;
 	private Stage stage;
 	private Scheduler scheduler;
@@ -45,7 +45,7 @@ public class Person extends Actor {
 	public static Person generatePerson(Stage stage, TimeController timeController, PersonGrowth growth){
 		Person person = new Person(stage, growth);
 		person.setBirthday(timeController.generateBirthday(growth));
-		person.setPosition(new Position(30,30));
+		person.setPosition(new Position(10,10));
 		person.scheduler = new ActiveScheduler();
 		return person;
 	}
@@ -60,6 +60,11 @@ public class Person extends Actor {
 
 	public Position getPosition(){
 		return position;
+	}
+
+	public void movePosition(float X, float Y){
+		this.position.addFloatX(X);
+		this.position.addFloatY(Y);
 	}
 
 
@@ -90,6 +95,7 @@ public class Person extends Actor {
 		}
 		actions.get(0).execute();
 		statistic.update(delta);
+
 	}
 
 	public void setState(State state){
