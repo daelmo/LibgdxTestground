@@ -42,27 +42,27 @@ public class Person extends Actor {
 		this.actions = new ArrayList<Walking>();
 	}
 
-	public static Person generatePerson(Stage stage, TimeController timeController, PersonGrowth growth){
+	public static Person generatePerson(Stage stage, TimeController timeController, PersonGrowth growth) {
 		Person person = new Person(stage, growth);
 		person.setBirthday(timeController.generateBirthday(growth));
-		person.setPosition(new Position(10,10));
+		person.setPosition(new Position(10, 10));
 		person.scheduler = new ActiveScheduler();
 		return person;
 	}
 
-	private void setBirthday(Date birthday){
+	private void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
-	public void setPosition(Position position){
+	public void setPosition(Position position) {
 		this.position = position;
 	}
 
-	public Position getPosition(){
+	public Position getPosition() {
 		return position;
 	}
 
-	public void movePosition(float X, float Y){
+	public void movePosition(float X, float Y) {
 		this.position.addFloatX(X);
 		this.position.addFloatY(Y);
 	}
@@ -70,15 +70,15 @@ public class Person extends Actor {
 
 	@Override
 	public void draw(Batch batch, float alpha) {
-		if(state == State.active){
+		if (state == State.active) {
 			body.draw(batch, alpha, position, view, 0f);
 		}
-		if (state == State.unconscious){
+		if (state == State.unconscious) {
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
-			body.draw(batch, alpha, position,  view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
+			body.draw(batch, alpha, position, view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
 		}
-		if (state == State.dead){
+		if (state == State.dead) {
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
 			body.draw(batch, alpha, position, view, -90f);
@@ -86,23 +86,26 @@ public class Person extends Actor {
 	}
 
 	@Override
-	public void act(float delta){
-		if(!actions.isEmpty() && actions.get(0).checkCondition()){
-			actions.remove(0);
+	public void act(float delta) {
+		if(state == State.active) {
+			if (actions.isEmpty()) {
+				actions.add(scheduler.getAction(this));
+			}
+			while (actions.get(0).checkCondition()) {
+				actions.remove(0);
+				actions.add(scheduler.getAction(this));
+			}
+			actions.get(0).execute(delta);
+			statistic.update(delta);
 		}
-		if(actions.isEmpty()){
-			actions.add(scheduler.getAction(this));
-		}
-		actions.get(0).execute();
-		statistic.update(delta);
 
 	}
 
-	public void setState(State state){
+	public void setState(State state) {
 		this.state = state;
 	}
 
-	public State getState(){
+	public State getState() {
 		return state;
 	}
 

@@ -45,4 +45,10 @@ public class Position {
 	public String toString(){
 		return this.X + " " + this.Y;
 	}
+
+	public boolean compareTo(Position position){
+		if( ! (Float.compare(this.X, position.X) < 0.5f)) return false;
+		if( ! (Float.compare(this.Y, position.Y) < 0.5f)) return false;
+		return true;
+	}
 }

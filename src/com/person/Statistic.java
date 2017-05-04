@@ -1,9 +1,10 @@
 package com.person;
-import com.event.Date;
 
 public class Statistic {
 	private Person person;
-	public float walkingSpeed = 1f;
+	public float walkingSpeed = 50f;
+	public float consumationSpeed = 30f;
+	
 	public float health = 100;
 
 
@@ -16,7 +17,7 @@ public class Statistic {
 	}
 
 	public void update( float delta){
-		takeDamage( delta * 3);
+		takeDamage( delta * 1);
 	}
 
 	public void takeDamage(float damage){

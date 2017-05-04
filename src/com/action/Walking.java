@@ -12,18 +12,19 @@ public class Walking implements Action{
 		this.goalPosition = goalPosition;
 	}
 
-	public void execute(){
+	public void execute(float delta){
 		float wholeX,wholeY, stepX, stepY;
 
 		wholeX= goalPosition.getFloatX() - person.getPosition().getFloatX();
 		wholeY= goalPosition.getFloatY() - person.getPosition().getFloatY();
-		stepX = Math.min(wholeX , person.statistic.walkingSpeed);
-		stepY = Math.min(wholeY , person.statistic.walkingSpeed);
-		person.movePosition(stepX, stepY);
+		System.out.println( wholeX + " " + wholeY);
+		stepX = Math.signum(wholeX) * person.statistic.walkingSpeed;
+		stepY = Math.signum(wholeY) * person.statistic.walkingSpeed;
+		person.movePosition(stepX * delta, stepY * delta);
 	}
 
 	public boolean checkCondition(){
-		if(person.getPosition() == goalPosition) return true;
+		if(goalPosition.compareTo(person.getPosition())) return true;
 		else return false;
 	}
 
