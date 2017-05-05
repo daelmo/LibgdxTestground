@@ -11,14 +11,21 @@ For the implementation using Java and the game engine libGDX.
 * time is passing and can be paused with space key
 * grit for traversability is implemented
 * settings are loaded from a properties file
-* implements stats for a person: hunger, ...
+* implements stats for a person: walkingSpeed, ...
+* implement state machine for actor : dead, unconscious, working, sleeping
+* implemented dumb path finding
+* implemented dumb task scheduler for person
 
 ## TODO
-* implement state machine for actor : dead, unconscious, working, sleeping
+
 * implement activity KI for working state
 * implement activity "walking" with A* path finding
-* implement day structure
+* implement routines (like cooking) using a set of activities
+* implement day structure ( sleep time, work time, meal schedule)
+* implement passive actors (orphans)
 * implement loading of objects from json script
+* implement GUI (menu, object placement, ...)
+* implement hunger, ...
 
 
 
