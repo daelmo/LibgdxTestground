@@ -47,8 +47,8 @@ public class Position {
 	}
 
 	public boolean compareTo(Position position){
-		if( ! (Float.compare(this.X, position.X) < 0.5f)) return false;
-		if( ! (Float.compare(this.Y, position.Y) < 0.5f)) return false;
+		if( !(Float.compare(this.X, position.X) < 0.9f)) return false;
+		if( !(Float.compare(this.Y, position.Y) < 0.9f)) return false;
 		return true;
 	}
 }
