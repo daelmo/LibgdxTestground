@@ -3,7 +3,7 @@ package com.person;
 public class Statistic {
 	private Person person;
 	public float walkingSpeed = 60f;
-	public float health = 100;
+	public float health = FULLHEALTH;
 
 
 	public static final float FULLHEALTH = 100;

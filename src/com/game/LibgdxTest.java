@@ -78,7 +78,8 @@ public class LibgdxTest extends ApplicationAdapter {
 		viewport.setStage(stage);
 
 		//build Level
-		level = Level.getInstance(Integer.parseInt(prop.getProperty("level_size")));
+		int size= Integer.parseInt(prop.getProperty("level_size"));
+		level = Level.getInstance(size, size);
 		level.addToStage(stage);
 		objectCreator = new ObjectCreator(level, stage);
 

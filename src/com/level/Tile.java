@@ -7,11 +7,11 @@ import java.util.Arrays;
 
 public class Tile extends Actor {
 
-	static final int WIDTH = 64, HEIGHT= 64;
-	MapSprite[] spriteList;
-	final int posX, posY;
-	int zIndex;
-	boolean[] isTraversable;
+	public static final int WIDTH = 64, HEIGHT= 64;
+	private MapSprite[] spriteList;
+	public final int posX, posY;
+	private int zIndex;
+	public boolean[] isTraversable;
 
 	public Tile(int posX, int posY, int zIndex) {
 		this.posX = posX;

@@ -14,10 +14,8 @@ public class Walking implements Action{
 
 	public void execute(float delta){
 		float wholeX,wholeY, stepX, stepY;
-
 		wholeX= goalPosition.getFloatX() - person.getPosition().getFloatX();
 		wholeY= goalPosition.getFloatY() - person.getPosition().getFloatY();
-		System.out.println( wholeX + " " + wholeY);
 		stepX = Math.signum(wholeX) * person.statistic.walkingSpeed;
 		stepY = Math.signum(wholeY) * person.statistic.walkingSpeed;
 		person.movePosition(stepX * delta, stepY * delta);

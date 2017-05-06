@@ -21,7 +21,7 @@ public class ObjectCreator {
 	public StaticObject createObject(int x, int y, int typeID) {
 		if (isPlaceable(x, y)) {
 			StaticObject object = new StaticObject(x, y, typeID);
-			level.setTraversable(x, y, 1, false);
+			level.setTraversable(x, y, Level.STATIC_OBJECT_ZINDEX, false);
 			objectGroup.addActor(object);
 			return object;
 		} else {
