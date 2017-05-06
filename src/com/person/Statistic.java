@@ -2,9 +2,7 @@ package com.person;
 
 public class Statistic {
 	private Person person;
-	public float walkingSpeed = 50f;
-	public float consumationSpeed = 30f;
-	
+	public float walkingSpeed = 60f;
 	public float health = 100;
 
 
