@@ -5,45 +5,49 @@ import com.action.ActiveScheduler;
 import com.action.Scheduler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Date;
 import com.event.TimeController;
+import com.game.ActorFont;
 import com.level.Position;
 
 import java.util.ArrayList;
 
 public class Person extends Actor {
-	public String name;
+	public String name = "Gustav";
 	public Date birthday;
 	private Position position;
 	private Body body;
-	public ViewDirection view;
-	private State state;
+	public ViewDirection view = ViewDirection.left;
+	private State state = State.active;
 	public Statistic statistic;
 	private PersonGrowth growth;
 	private Stage stage;
 	private Scheduler scheduler;
 	private final float shakeAmplitude = 5.0f;
 	private float rotation = 0;
-	private ArrayList<Walking> actions;
+	private ArrayList<Walking> actions = new ArrayList<Walking>();
+	private Group FontGroup = new Group();
+	private ActorFont printName;
 
 
-	private Person(Stage stage, PersonGrowth growth) {
+	private Person(Stage stage, BitmapFont font, PersonGrowth growth) {
 		this.stage = stage;
-		this.position = position;
 		this.stage.addActor(this);
 		this.growth = growth;
 		this.body = new Body(growth);
-		this.view = ViewDirection.left;
 		this.statistic = new Statistic(this);
-		this.state = State.active;
-		this.actions = new ArrayList<Walking>();
+		stage.addActor(FontGroup);
+		printName = new ActorFont(font, name, 50, 0);
+		FontGroup.addActor(printName);
 	}
 
-	public static Person generatePerson(Stage stage, TimeController timeController, PersonGrowth growth) {
-		Person person = new Person(stage, growth);
+	public static Person generatePerson(Stage stage, BitmapFont font, TimeController timeController, PersonGrowth growth) {
+		Person person = new Person(stage, font, growth);
 		person.setBirthday(timeController.generateBirthday(growth));
 		person.setPosition(new Position(10, 10));
 		person.scheduler = new ActiveScheduler();
@@ -56,6 +60,7 @@ public class Person extends Actor {
 
 	public void setPosition(Position position) {
 		this.position = position;
+		this.printName.setPosition(position);
 	}
 
 	public Position getPosition() {
@@ -108,6 +113,5 @@ public class Person extends Actor {
 	public State getState() {
 		return state;
 	}
-
 
 }

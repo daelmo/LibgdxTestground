@@ -84,7 +84,7 @@ public class LibgdxTest extends ApplicationAdapter {
 
 
 		// To test
-		Person Person1 = Person.generatePerson(stage, timeController, PersonGrowth.ADULT);
+		Person Person1 = Person.generatePerson(stage, font, timeController, PersonGrowth.ADULT);
 		level.PersonGroup.addActor(Person1);
 
 		objectCreator.createObject(3, 3, 1);
@@ -96,7 +96,11 @@ public class LibgdxTest extends ApplicationAdapter {
 	@Override
 	public void render() {
 		handlePressedKeys();
-		handleTimer(Gdx.graphics.getDeltaTime());
+
+		if (gamePaused == false) {
+			stage.act();
+			timeController.addTime(Gdx.graphics.getDeltaTime());
+		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -141,12 +145,6 @@ public class LibgdxTest extends ApplicationAdapter {
 		}
 	}
 
-	private void handleTimer(float deltaTime) {
-		if (gamePaused == false) {
-			stage.act();
-			timeController.addTime(deltaTime);
-		}
-	}
 
 	public void toggleGameState() {
 		if (gamePaused == false) {
