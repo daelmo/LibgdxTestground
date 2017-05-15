@@ -3,11 +3,6 @@ package com.game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-
-/**
- *
- * @author fine
- */
 public class GameInputProcessor implements InputProcessor {
 
 	public boolean keyUpPressed = false;
