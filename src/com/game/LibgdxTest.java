@@ -12,6 +12,7 @@ import com.event.TimeController;
 import com.level.Level;
 import com.object.ObjectCreator;
 import com.person.Person;
+import com.person.PersonBuilder;
 import com.person.PersonGrowth;
 
 import java.io.*;
@@ -85,8 +86,11 @@ public class LibgdxTest extends ApplicationAdapter {
 
 
 		// To test
-		Person Person1 = Person.generatePerson(stage, font, timeController, PersonGrowth.ADULT);
-		Person Person2 = Person.generatePerson(stage, font, timeController, PersonGrowth.ADULT);
+		PersonBuilder personBuilder = new PersonBuilder(timeController, stage, font);
+
+
+		Person Person1 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
+		Person Person2 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
 		level.PersonGroup.addActor(Person1);
 		level.PersonGroup.addActor(Person2);
 

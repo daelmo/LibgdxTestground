@@ -7,11 +7,11 @@ import com.level.Position;
 
 public class ActorFont extends Actor {
 	BitmapFont font;
-	Position position = new Position(0,0);
+	Position position = new Position(0, 0);
 	float shiftX, shiftY;
 	String text;
 
-	public ActorFont(BitmapFont font, String text, int shiftX, int shiftY){
+	public ActorFont(BitmapFont font, String text, int shiftX, int shiftY) {
 		this.font = font;
 		this.text = text;
 		this.shiftX = shiftX;
@@ -30,7 +30,7 @@ public class ActorFont extends Actor {
 	}
 
 
-	public void setPosition(Position position){
+	public void setPosition(Position position) {
 		this.position = position;
 	}
 
