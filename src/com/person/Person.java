@@ -50,7 +50,7 @@ public class Person extends Actor {
 		Person person = new Person(stage, font, growth);
 		person.setBirthday(timeController.generateBirthday(growth));
 		person.setPosition(new Position(10, 10));
-		person.scheduler = new ActiveScheduler();
+		person.scheduler = ActiveScheduler.getScheduler();
 		return person;
 	}
 

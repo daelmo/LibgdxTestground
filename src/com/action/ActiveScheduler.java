@@ -6,11 +6,19 @@ import com.person.Person;
 import java.util.Random;
 
 public class ActiveScheduler implements Scheduler {
+	private static Scheduler scheduler;
 
 	public Walking getAction(Person person) {
 		Random random = new Random();
 		int x = random.nextInt( Tile.WIDTH *10) +1;
 		int y = random.nextInt(Tile.HEIGHT *10) +1;
 		return new Walking(person, new Position(x,y));
+	}
+
+	public static Scheduler getScheduler(){
+		if(scheduler == null){
+			scheduler = new ActiveScheduler();
+		}
+		return scheduler;
 	}
 }
