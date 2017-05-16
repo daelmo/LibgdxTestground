@@ -124,4 +124,8 @@ public class Person extends Actor {
 		FontGroup.addActor(actorFont);
 	}
 
+	public void setViewDirection(ViewDirection viewDirection){
+		this.view = viewDirection;
+	}
+
 }

@@ -2,6 +2,7 @@ package com.action;
 
 import com.level.Position;
 import com.person.Person;
+import com.person.ViewDirection;
 
 public class Walking implements Action{
 	private Person person;
@@ -17,7 +18,7 @@ public class Walking implements Action{
 		wholeX= goalPosition.getFloatX() - person.getPosition().getFloatX();
 		wholeY= goalPosition.getFloatY() - person.getPosition().getFloatY();
 
-
+		//calculate step per frame
 		if(Math.abs(wholeX) < person.statistic.walkingSpeed){
 			stepX = wholeX;
 		}else{
@@ -29,6 +30,16 @@ public class Walking implements Action{
 		}else{
 			stepY = Math.signum(wholeY) * person.statistic.walkingSpeed;
 		}
+
+		//set Viewdirection for step
+		if(stepY > 0){ person.setViewDirection(ViewDirection.top);}
+		else{person.setViewDirection(ViewDirection.down);}
+		if(stepX>stepY && stepX > 0){person.setViewDirection(ViewDirection.right);}
+		if(stepX<stepY && stepX < 0){person.setViewDirection(ViewDirection.left);}
+
+
+
+		//set position to new position
 		person.movePosition(stepX * delta, stepY * delta);
 	}
 
