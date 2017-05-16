@@ -28,7 +28,7 @@ public class PersonBuilder {
 		person.setName(name);
 		person.setBody(new Body(growth));
 		person.setStatistic(new Statistic(person));
-
+		person.setGender(Gender.MALE);
 		person.printName = new ActorFont(font, name, 50, 0);
 		person.addText(person.printName);
 		person.setPosition(new Position(10, 10));

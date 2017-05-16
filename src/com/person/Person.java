@@ -32,6 +32,7 @@ public class Person extends Actor {
 	private ArrayList<Walking> actions = new ArrayList<Walking>();
 	private Group FontGroup = new Group();
 	public ActorFont printName;
+	private Gender gender;
 
 
 	public Person(Stage stage, PersonGrowth growth, BitmapFont font) {
@@ -126,6 +127,10 @@ public class Person extends Actor {
 
 	public void setViewDirection(ViewDirection viewDirection){
 		this.view = viewDirection;
+	}
+
+	public void setGender(Gender gender){
+		this.gender = gender;
 	}
 
 }
