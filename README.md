@@ -13,11 +13,16 @@ For the implementation using Java and the game engine libGDX.
 * settings are loaded from a properties file
 * implements stats for a person: walkingSpeed, ...
 * implement state machine for actor : dead, unconscious, working, sleeping
-* implemented dumb path finding
-* implemented dumb task scheduler for person
+* implemented straight path finding
+* implemented dumb task scheduler for an person
+* loading names for characters from JSON-file, assigning one randomly
+* walking activity finaly implemented, using different view directions for walking
 
 ## TODO
 
+* setting borders for scrolling of screen
+* drawing images for different growth of person
+* set setoff for drawing of character
 * implement activity KI for working state
 * implement activity "walking" with A* path finding
 * implement routines (like cooking) using a set of activities
@@ -30,4 +35,4 @@ For the implementation using Java and the game engine libGDX.
 
 
 ## First Impressions:
-![alt tag](https://raw.githubusercontent.com/daelmo/LibgdxTestground/master/assets/screenshots/17-03-31.jpg)
+![alt tag](https://raw.githubusercontent.com/daelmo/LibgdxTestground/master/assets/screenshots/17-05-16.jpg)
