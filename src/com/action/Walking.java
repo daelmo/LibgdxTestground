@@ -16,14 +16,25 @@ public class Walking implements Action{
 		float wholeX,wholeY, stepX, stepY;
 		wholeX= goalPosition.getFloatX() - person.getPosition().getFloatX();
 		wholeY= goalPosition.getFloatY() - person.getPosition().getFloatY();
-		stepX = Math.signum(wholeX) * person.statistic.walkingSpeed;
-		stepY = Math.signum(wholeY) * person.statistic.walkingSpeed;
+
+
+		if(Math.abs(wholeX) < person.statistic.walkingSpeed){
+			stepX = wholeX;
+		}else{
+			stepX = Math.signum(wholeX) * person.statistic.walkingSpeed;
+		}
+
+		if(Math.abs(wholeY) < person.statistic.walkingSpeed){
+			stepY = wholeY;
+		}else{
+			stepY = Math.signum(wholeY) * person.statistic.walkingSpeed;
+		}
 		person.movePosition(stepX * delta, stepY * delta);
 	}
 
+	//becomes true when position is reached
 	public boolean checkCondition(){
-		if(goalPosition.compareTo(person.getPosition())) return true;
-		else return false;
+		return goalPosition.compareTo(person.getPosition());
 	}
 
 	@Override

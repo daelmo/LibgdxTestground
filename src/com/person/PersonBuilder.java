@@ -28,8 +28,6 @@ public class PersonBuilder {
 		person.setName(name);
 		person.setBody(new Body(growth));
 		person.setStatistic(new Statistic(person));
-		this.stage = stage;
-		this.font = font;
 
 		person.printName = new ActorFont(font, name, 50, 0);
 		person.addText(person.printName);

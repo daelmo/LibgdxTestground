@@ -46,9 +46,10 @@ public class Position {
 		return this.X + " " + this.Y;
 	}
 
+	// stop action when true, go on when false
 	public boolean compareTo(Position position) {
-		if (!(Float.compare(this.X, position.X) < 0.9f)) return false;
-		if (!(Float.compare(this.Y, position.Y) < 0.9f)) return false;
+		if (Math.abs(this.X - position.X) > 1.9f) return false;
+		if (Math.abs(this.Y - position.Y) > 1.9f) return false;
 		return true;
 	}
 }

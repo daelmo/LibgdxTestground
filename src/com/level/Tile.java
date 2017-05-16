@@ -45,4 +45,5 @@ public class Tile extends Actor {
 		isTraversable[z] = bool;
 	}
 
+
 }
