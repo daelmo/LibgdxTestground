@@ -14,6 +14,8 @@ public class Body {
 	private static Sprite[][][] sprites = null;
 	private int[] variants;
 	private Color[] bodyColor;
+	public final int SETOFFX= 64;
+	public final int SETOFFY=10;
 	private static final int[] variantCounts = {1, 1, 1, 1};
 	private static final int bodyPartCount = variantCounts.length;
 	private static final String[] ImgPaths = {
@@ -74,7 +76,7 @@ public class Body {
 		for (int bPart = 0; bPart < bodyPartCount; bPart++) {
 			Sprite s = sprites[bPart][variants[bPart]][view.ordinal()];
 			s.setColor(bodyColor[bPart]);
-			s.setPosition(position.getFloatX(), position.getFloatY());
+			s.setPosition(position.getFloatX() - SETOFFX, position.getFloatY() - SETOFFY);
 			s.setRotation(rotation);
 			s.draw(batch);
 		}
