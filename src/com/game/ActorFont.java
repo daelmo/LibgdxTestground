@@ -14,13 +14,12 @@ public class ActorFont extends Actor {
 	public ActorFont(BitmapFont font, String text, int shiftX, int shiftY) {
 		this.font = font;
 		this.text = text;
-		this.shiftX = shiftX;
-		this.shiftY = shiftY;
+		this.setOrigin(shiftX, shiftY);
 	}
 
 	@Override
 	public void draw(Batch batch, float alpha) {
-		font.draw(batch, text, position.getFloatX() + shiftX, position.getFloatY() + shiftY);
+		font.draw(batch, text, position.getFloatX(), position.getFloatY());
 
 	}
 

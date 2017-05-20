@@ -5,19 +5,21 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.level.Position;
 
 import java.util.Random;
 
-public class Body {
+public class Body extends Actor {
 
 	private static Sprite[][][] sprites = null;
 	private int[] variants;
 	private Color[] bodyColor;
-	public final int SETOFFX= 64;
-	public final int SETOFFY=10;
+	public final float SETOFFX= -64;
+	public final float SETOFFY= -10;
 	private static final int[] variantCounts = {1, 1, 1, 1};
 	private static final int bodyPartCount = variantCounts.length;
+	private static final int IMAGEWIDTH = 128;
 	private static final String[] ImgPaths = {
 		"body/body%03d.png",
 		"body/head%03d.png",
@@ -66,7 +68,7 @@ public class Body {
 			for (int variant = 0; variant < variantCounts[bPart]; variant++) {
 				Texture t = new Texture(Gdx.files.internal(String.format(ImgPaths[bPart], variant)));
 				for (int dir = 0; dir < viewDirLength; dir++) {
-					sprites[bPart][variant][dir] = new Sprite(t, 128 * dir, 0, 128, 128);
+					sprites[bPart][variant][dir] = new Sprite(t, IMAGEWIDTH * dir, 0, IMAGEWIDTH, IMAGEWIDTH);
 				}
 			}
 		}
@@ -75,8 +77,9 @@ public class Body {
 	public void draw(Batch batch, float alpha, Position position, ViewDirection view, float rotation) {
 		for (int bPart = 0; bPart < bodyPartCount; bPart++) {
 			Sprite s = sprites[bPart][variants[bPart]][view.ordinal()];
+			s.setOrigin(IMAGEWIDTH/2,30);
 			s.setColor(bodyColor[bPart]);
-			s.setPosition(position.getFloatX() - SETOFFX, position.getFloatY() - SETOFFY);
+			s.setPosition(position.getFloatX() + SETOFFX, position.getFloatY() + SETOFFY);
 			s.setRotation(rotation);
 			s.draw(batch);
 		}

@@ -68,6 +68,7 @@ public class Person extends Actor {
 		if (state == State.unconscious) {
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
+
 			body.draw(batch, alpha, position, view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
 		}
 		if (state == State.dead) {

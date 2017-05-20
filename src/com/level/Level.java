@@ -59,4 +59,6 @@ public class Level {
 	public void setTraversable(int x, int y, int z, boolean bool) {
 		GameMap[x][y].setTraversable(z, bool);
 	}
+
+
 }

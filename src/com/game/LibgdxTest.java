@@ -1,11 +1,18 @@
 package com.game;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Season;
 import com.event.TimeController;
@@ -14,24 +21,29 @@ import com.object.ObjectCreator;
 import com.person.Person;
 import com.person.PersonBuilder;
 import com.person.PersonGrowth;
+import gui.TimeBox;
 
 import java.io.*;
 import java.util.Properties;
 
-public class LibgdxTest extends ApplicationAdapter {
+public class LibgdxTest extends Game {
+	public RayHandler rayHandler;
+	public World world;
 
 	private BitmapFont font;
+	private TimeBox timeBox;
+
+
 	private Level level;
-	public Stage stage;
-	public GameInputProcessor gameInputProcessor;
-	public UIInputProcessor uiInputProcessor;
-	public InputMultiplexer multiplexer;
-	public customScreenViewport viewport;
+	public GameInputProcessor gameInputProcessor = new GameInputProcessor(this);
+	public InputMultiplexer multiplexer = new InputMultiplexer(gameInputProcessor);
+	public customScreenViewport viewport = new customScreenViewport();
+	public Stage stage ;
 	public ObjectCreator objectCreator;
 	public OrthographicCamera camera;
 
 	//start settings
-	public TimeController timeController = new TimeController(Season.spring);
+	public TimeController timeController;
 	public boolean gamePaused = false;
 
 	// read settings file
@@ -40,6 +52,14 @@ public class LibgdxTest extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+		Box2D.init();
+		font = new BitmapFont();
+		stage = new Stage(viewport);
+		world = new World(new Vector2(0, -98f), true);
+		rayHandler = new RayHandler(world);
+		rayHandler.setShadows(true);
+
+
 		//load settings file
 		try {
 			input = new FileInputStream("config.properties");
@@ -62,20 +82,14 @@ public class LibgdxTest extends ApplicationAdapter {
 		int viewportSize = Integer.parseInt(prop.getProperty("viewport_size"));
 		camera = new OrthographicCamera( viewportSize, viewportSize * (h / w));
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-		viewport = new customScreenViewport();
 		camera.update();
 
+		timeController  = new TimeController(rayHandler, Season.spring);
+
 		//build Input interface
-		gameInputProcessor = new GameInputProcessor(this);
-		uiInputProcessor = new UIInputProcessor();
-		multiplexer = new InputMultiplexer(gameInputProcessor, uiInputProcessor);
 		Gdx.input.setInputProcessor(multiplexer);
 
-		//build font
-		font = new BitmapFont();
-
 		//build stage
-		stage = new Stage(viewport);
 		viewport.setStage(stage);
 
 		//build Level
@@ -83,11 +97,10 @@ public class LibgdxTest extends ApplicationAdapter {
 		level = Level.getInstance(size, size);
 		level.addToStage(stage);
 		objectCreator = new ObjectCreator(level, stage);
-
-
-		// To test
 		PersonBuilder personBuilder = new PersonBuilder(timeController, stage, font);
 
+		initGUI();
+		// To test
 
 		Person Person1 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
 		Person Person2 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
@@ -98,12 +111,14 @@ public class LibgdxTest extends ApplicationAdapter {
 		objectCreator.createObject(8, 3, 1);
 		objectCreator.createObject(3, 8, 1);
 		objectCreator.createObject(3, 7, 1);
+
 	}
 
 	@Override
 	public void render() {
 		handlePressedKeys();
 
+		world.step(Gdx.graphics.getDeltaTime(), 3, 3);
 		if (gamePaused == false) {
 			stage.act();
 			timeController.addTime(Gdx.graphics.getDeltaTime());
@@ -111,14 +126,21 @@ public class LibgdxTest extends ApplicationAdapter {
 
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		stage.draw();
+		rayHandler.setCombinedMatrix(camera);
+		rayHandler.updateAndRender();
+
+
 		camera.update();
 	}
 
 	@Override
 	public void dispose() {
+		rayHandler.dispose();
 		stage.dispose();
 		font.dispose();
+		world.dispose();
 	}
 
 	@Override
@@ -136,7 +158,7 @@ public class LibgdxTest extends ApplicationAdapter {
 		gamePaused = false;
 	}
 
-	//contiuous keys only
+	//continuous keys only
 	private void handlePressedKeys() {
 		if (gameInputProcessor.keyLeftPressed) {
 			viewport.translateLeft();
@@ -159,6 +181,10 @@ public class LibgdxTest extends ApplicationAdapter {
 		} else if (gamePaused == true) {
 			resume();
 		}
+	}
+
+	public void initGUI(){
+		timeBox = new TimeBox(timeController, stage, font);
 	}
 
 }
