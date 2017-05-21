@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Date;
 import com.game.ActorFont;
 import com.level.Position;
+import gui.PersonBody;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class Person extends Actor {
 	public String name;
 	public Date birthday;
 	private Position position;
-	private Body body;
+	private PersonBody personBody;
 	public ViewDirection view = ViewDirection.left;
 	private State state = State.active;
 	public Statistic statistic;
@@ -63,18 +64,18 @@ public class Person extends Actor {
 	@Override
 	public void draw(Batch batch, float alpha) {
 		if (state == State.active) {
-			body.draw(batch, alpha, position, view, 0f);
+			personBody.draw(batch, alpha, position, view, 0f);
 		}
 		if (state == State.unconscious) {
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
 
-			body.draw(batch, alpha, position, view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
+			personBody.draw(batch, alpha, position, view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
 		}
 		if (state == State.dead) {
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
-			body.draw(batch, alpha, position, view, -90f);
+			personBody.draw(batch, alpha, position, view, -90f);
 		}
 	}
 
@@ -114,8 +115,8 @@ public class Person extends Actor {
 		this.statistic = statistic;
 	}
 
-	public void setBody(Body body) {
-		this.body = body;
+	public void setPersonBody(PersonBody personBody) {
+		this.personBody = personBody;
 	}
 
 	public void setName(String name){

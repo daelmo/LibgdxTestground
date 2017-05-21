@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.TimeController;
 import com.game.ActorFont;
 import com.level.Position;
+import gui.PersonBody;
 
 
 public class PersonBuilder {
@@ -26,7 +27,7 @@ public class PersonBuilder {
 		person.setScheduler(ActiveScheduler.getScheduler());
 		String name= nameGen.generatePersonName(Gender.MALE);
 		person.setName(name);
-		person.setBody(new Body(growth));
+		person.setPersonBody(new PersonBody(growth));
 		person.setStatistic(new Statistic(person));
 		person.setGender(Gender.MALE);
 		person.printName = new ActorFont(font, name, -5, 5);

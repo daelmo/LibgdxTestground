@@ -41,7 +41,7 @@ public class TimeController {
 		return new Date(birthYear, birthSeason, birthDay);
 	}
 
-	public String toSring(){
+	public String toString(){
 		return currentDate.toString();
 	}
 }

@@ -1,4 +1,4 @@
-package com.person;
+package gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.level.Position;
+import com.person.PersonGrowth;
+import com.person.ViewDirection;
 
 import java.util.Random;
 
-public class Body extends Actor {
+public class PersonBody extends Actor {
 
 	private static Sprite[][][] sprites = null;
 	private int[] variants;
@@ -30,7 +32,7 @@ public class Body extends Actor {
 
 
 
-	public Body(PersonGrowth growth) {
+	public PersonBody(PersonGrowth growth) {
 		possibleColor = new Color[2][4];
 		possibleColor[0][0] = Color.RED; // clothing color
 		possibleColor[0][1] = Color.BROWN; // head skin

@@ -5,21 +5,20 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.level.Position;
 
-public class ActorFont extends Actor {
+public class ActorFont<T> extends Actor {
 	BitmapFont font;
 	Position position = new Position(0, 0);
-	float shiftX, shiftY;
-	String text;
+	T t;
 
-	public ActorFont(BitmapFont font, String text, int shiftX, int shiftY) {
+	public ActorFont(BitmapFont font, T t, int shiftX, int shiftY) {
 		this.font = font;
-		this.text = text;
+		this.t = t;
 		this.setOrigin(shiftX, shiftY);
 	}
 
 	@Override
 	public void draw(Batch batch, float alpha) {
-		font.draw(batch, text, position.getFloatX(), position.getFloatY());
+		font.draw(batch, t.toString(), position.getFloatX(), position.getFloatY());
 
 	}
 

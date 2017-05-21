@@ -14,7 +14,7 @@ public class TimeBox {
 	public TimeBox(TimeController timer, Stage stage, BitmapFont font){
 		this.timeController = timer;
 		this.stage = stage;
-		time = new ActorFont(font, timeController.toSring() , -5, 5);
+		time = new ActorFont(font, timeController, -5, 5);
 		stage.addActor(time);
 	}
 
