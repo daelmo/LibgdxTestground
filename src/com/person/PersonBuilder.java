@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.TimeController;
 import com.game.ActorFont;
 import com.level.Position;
-import gui.PersonBody;
+import com.gui.PersonBody;
 
 
 public class PersonBuilder {

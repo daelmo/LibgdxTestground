@@ -2,6 +2,7 @@ package com.game;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 
 public class GameInputProcessor implements InputProcessor {
 
@@ -10,10 +11,10 @@ public class GameInputProcessor implements InputProcessor {
 	public boolean keyLeftPressed = false;
 	public boolean keyRightPressed = false;
 	public boolean keySpacePressed = false;
-	private LibgdxTest main;
+	private GameScreen screen;
 
-	public GameInputProcessor(LibgdxTest main) {
-		this.main = main;
+	public GameInputProcessor(GameScreen screen) {
+		this.screen = screen;
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class GameInputProcessor implements InputProcessor {
 				keyUpPressed = true;
 				return true;
 			case Input.Keys.SPACE:
-				main.toggleGameState();
+				screen.toggleGameState();
 				return true;
 		}		
 		return false;
@@ -86,10 +87,10 @@ public class GameInputProcessor implements InputProcessor {
 	public boolean scrolled(int amount) {
 		switch (amount) {
 			case 1:
-				main.viewport.zoomIn();
+				screen.viewport.zoomIn();
 				return true;
 			case -1:
-				main.viewport.zoomOut();
+				screen.viewport.zoomOut();
 				return true;
 		}
 		return false;

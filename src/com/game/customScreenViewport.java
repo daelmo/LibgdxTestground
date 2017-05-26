@@ -5,10 +5,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-/**
- *
- * @author fine
- */
 public class customScreenViewport extends ScreenViewport {
 	Stage stage;
 	OrthographicCamera camera;
@@ -19,7 +15,7 @@ public class customScreenViewport extends ScreenViewport {
 	public void setStage(Stage stage){
 		this.stage = stage;
 		this.camera = (OrthographicCamera) stage.getCamera();
-		
+
 	}
 	
 	public void zoomOut() {

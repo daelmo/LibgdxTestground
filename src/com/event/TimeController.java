@@ -17,6 +17,7 @@ public class TimeController {
 		this.rayHandler = rayHandler;
 		this.currentDate = new Date(1, season, 1);
 		this.currentSeconds = 0;
+		rayHandler.setShadows(true);
 	}
 
 	public void addTime(float delta){

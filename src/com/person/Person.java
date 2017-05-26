@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Date;
 import com.game.ActorFont;
 import com.level.Position;
-import gui.PersonBody;
+import com.gui.PersonBody;
 
 import java.util.ArrayList;
 
