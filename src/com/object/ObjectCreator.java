@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.level.Level;
 import java.util.HashMap;
-import java.util.Map;
 
 import static com.badlogic.gdx.net.HttpRequestBuilder.json;
 
@@ -13,7 +12,7 @@ public class ObjectCreator {
 	Level level;
 	Stage stage;
 	Group objectGroup;
-	Map<String,StaticObject> objects;
+	HashMap<String,StaticObject> objects;
 
 
 	public ObjectCreator(Level level, Stage stage) {
