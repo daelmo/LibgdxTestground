@@ -16,6 +16,7 @@ For the implementation using Java and the game engine libGDX.
 * implemented straight path finding
 * implemented dumb task scheduler for an person
 * loading names for characters from JSON-file, assigning one randomly
+* implement loading of objects from JSON-file
 * walking activity finaly implemented, using different view directions for walking
 * daylight cycle implemented, it gets dark during the night
 
@@ -28,7 +29,7 @@ For the implementation using Java and the game engine libGDX.
 * implement routines (like cooking) using a set of activities
 * implement day structure ( sleep time, work time, meal schedule)
 * implement passive actors (orphans)
-* implement loading of objects from json script
+
 * implement GUI (menu, object placement, ...)
 
 
