@@ -2,52 +2,48 @@ package com.level;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.game.Constants;
+import com.object.StaticObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Level {
 	private static Level instance = null;
-	public Tile[][] GameMap;
-	public Group MapGroup = new Group();
-	public final int LEVEL_HEIGHT;
-	public final int LEVEL_WIDTH;
-	public static final int FLOOR_ZINDEX = 0;
-	public static final int STATIC_OBJECT_ZINDEX = 1;
-	public static final int DYNAMIC_OBJECT_ZINDEX = 2;
-	public static final int BACKGROUND_ZINDEX = 3;
-	public Group PersonGroup = new Group();
 
-	protected Level(int xSize, int ySize) {
-		LEVEL_WIDTH = xSize;
-		LEVEL_HEIGHT = ySize;
+	public Group floorGroup = new Group();
+	public Group personGroup = new Group();
+	public Group objectGroup = new Group();
+	public Tile[][] traversableMap;
+	public HashMap<StaticObject,ArrayList<StaticObject>> objectPlacement = new HashMap<>();
 
-		GameMap = new Tile[LEVEL_WIDTH][LEVEL_HEIGHT];
-		for (int x = 0; x < LEVEL_WIDTH; x++) {
-			for (int y = 0; y < LEVEL_HEIGHT; y++) {
-				Tile t = new Tile(x, y, BACKGROUND_ZINDEX);
-				GameMap[x][y] = t;
-				MapGroup.addActor(t);
-			}
-		}
+	protected Level() {
+		generateTraversableMap();
+		generateFloor();
+
 	}
 
-	public static Level getInstance(int xSize, int ySize) {
+	public static Level getInstance() {
 		if (instance == null) {
-			instance = new Level(xSize, ySize);
+			instance = new Level();
 		}
 		return instance;
 	}
 
 	public void addToStage(Stage stage) {
-		stage.addActor(MapGroup);
-		stage.addActor(PersonGroup);
+		stage.addActor(floorGroup);
+		stage.addActor(objectGroup);
+		stage.addActor(personGroup);
 	}
 
 	public void removeFromStage() {
-		MapGroup.remove();
-		PersonGroup.remove();
+		personGroup.remove();
+		objectGroup.remove();
+		floorGroup.remove();
 	}
 
 	public boolean isTraversable(int x, int y) {
-		Tile t = GameMap[x][y];
+		Tile t = traversableMap[x][y];
 		for (boolean traversable : t.isTraversable) {
 			if (traversable == false) {
 				return false;
@@ -57,8 +53,23 @@ public class Level {
 	}
 
 	public void setTraversable(int x, int y, int z, boolean bool) {
-		GameMap[x][y].setTraversable(z, bool);
+		traversableMap[x][y].setTraversable(z, bool);
 	}
 
+	private void generateTraversableMap(){
+		traversableMap = new Tile[Constants.LEVEL_WIDTH][Constants.LEVEL_HEIGHT];
+		for (int x = 0; x < Constants.LEVEL_WIDTH; x++) {
+			for (int y = 0; y < Constants.LEVEL_HEIGHT; y++) {
+				traversableMap[x][y] = new Tile(x,y);
+			}
+		}
+	}
 
+	private void generateFloor(){
+		for (int x = 0; x < Constants.LEVEL_WIDTH; x++) {
+			for (int y = 0; y < Constants.LEVEL_HEIGHT; y++) {
+				floorGroup.addActor(new Floor(x, y));
+			}
+		}
+	}
 }

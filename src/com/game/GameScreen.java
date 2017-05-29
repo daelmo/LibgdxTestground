@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Season;
@@ -57,7 +56,7 @@ public class GameScreen implements Screen {
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
 		camera.update();
 
-		level = Level.getInstance(10, 10);
+		level = Level.getInstance();
 		level.addToStage(stage);
 		world = new World(new Vector2(0, -98f), true);
 		rayHandler = new RayHandler(world);
@@ -72,8 +71,8 @@ public class GameScreen implements Screen {
 		//init Scenario
 		Person Person1 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
 		Person Person2 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
-		level.PersonGroup.addActor(Person1);
-		level.PersonGroup.addActor(Person2);
+		level.personGroup.addActor(Person1);
+		level.personGroup.addActor(Person2);
 
 		objectCreator.createObject(3, 3, "stone");
 		objectCreator.createObject(8, 3, "stone");

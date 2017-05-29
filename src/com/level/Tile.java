@@ -1,44 +1,19 @@
 package com.level;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.game.Constants;
 
 import java.util.Arrays;
 
-public class Tile extends Actor {
+public class Tile {
 
-	public static final int WIDTH = 64, HEIGHT= 64;
-	private MapSprite[] spriteList;
 	public final int posX, posY;
-	private int zIndex;
 	public boolean[] isTraversable;
 
-	public Tile(int posX, int posY, int zIndex) {
+	public Tile(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
-		this.zIndex = zIndex;
-		isTraversable = new boolean[zIndex];
+		isTraversable = new boolean[Constants.MAX_ZINDEX];
 		Arrays.fill(isTraversable, Boolean.TRUE);
-
-		MapSprite earthSprite = new MapSprite("floor/earth.png");
-		spriteList = new MapSprite[2];
-		spriteList[0] = earthSprite;
-	}
-
-	@Override
-	public void act(float delta) {
-
-	}
-
-	@Override
-	public void draw(Batch batch, float parentAlpha) {
-		for (int i = 0; i < spriteList.length; i++) {
-			if (spriteList[i] != null) {
-				spriteList[i].setPosition(posX * WIDTH, posY * HEIGHT);
-				spriteList[i].setZIndex(zIndex);
-				spriteList[i].draw(batch);
-			}
-		}
 	}
 
 	public void setTraversable(int z, boolean bool) {

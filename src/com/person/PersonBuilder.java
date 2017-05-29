@@ -32,7 +32,7 @@ public class PersonBuilder {
 		person.setGender(Gender.MALE);
 		person.printName = new ActorFont(font, name, -5, 5);
 		person.addText(person.printName);
-		person.setPosition(new Position(0, 0));
+		person.setPosition(Position.getRandomPosition());
 		return person;
 	}
 }

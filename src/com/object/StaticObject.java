@@ -1,10 +1,8 @@
 package com.object;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.game.Constants;
 import com.level.MapSprite;
 
 public class StaticObject extends Actor {
@@ -15,7 +13,7 @@ public class StaticObject extends Actor {
 	private String spritePath;
 	private MapSprite sprite;
 	private int posX, posY;
-	private int zIndex = 2;
+	private int zIndex = Constants.STATIC_OBJECT_ZINDEX;
 
 	public StaticObject createCopyAt(int x, int y){
 		StaticObject object = new StaticObject();
@@ -32,7 +30,7 @@ public class StaticObject extends Actor {
 
 	public void draw(Batch batch, float alpha) {
 		sprite = new MapSprite(spritePath);
-		sprite.setPosition(posX * 64, posY * 64);
+		sprite.setPosition(posX * Constants.TILE_WIDTH, posY * Constants.TILE_HEIGHT);
 		sprite.setOrigin(originX,originY);
 		sprite.setZIndex(zIndex);
 		sprite.draw(batch);
