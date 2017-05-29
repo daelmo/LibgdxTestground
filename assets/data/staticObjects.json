@@ -9,10 +9,10 @@
   },
   "bush": {
     "spritePath": "object/bush.png",
-    "sizeX": 32,
-    "sizeY": 32,
-    "originX": 16,
-    "originY": 16,
+    "sizeX": 64,
+    "sizeY": 64,
+    "originX": 32,
+    "originY": 32,
     "isTraversable": true
   }
 }
