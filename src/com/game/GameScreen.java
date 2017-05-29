@@ -32,8 +32,8 @@ public class GameScreen implements Screen {
 
 
 	public OrthographicCamera camera;
-	public GameInputProcessor gameInputProcessor ;
-	public customScreenViewport viewport ;
+	public GameInputProcessor gameInputProcessor;
+	public customScreenViewport viewport;
 
 	public TimeBox timeBox;
 
@@ -46,7 +46,6 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor(gameInputProcessor);
 
 		//build camera settings
-		camera = new OrthographicCamera();
 		viewport= new customScreenViewport();
 		stage = new Stage(viewport);
 		viewport.setStage(stage);
