@@ -17,7 +17,6 @@ public class StaticObject extends Actor {
 	private int posX, posY;
 	private int zIndex = 2;
 
-
 	public StaticObject createCopyAt(int x, int y){
 		StaticObject object = new StaticObject();
 		object.spritePath = this.spritePath;
@@ -31,19 +30,12 @@ public class StaticObject extends Actor {
 		return object;
 	}
 
-
-
 	public void draw(Batch batch, float alpha) {
 		sprite = new MapSprite(spritePath);
 		sprite.setPosition(posX * 64, posY * 64);
 		sprite.setOrigin(originX,originY);
 		sprite.setZIndex(zIndex);
 		sprite.draw(batch);
-	}
-
-	public void setPosition( int x,int y){
-		this.posX = x;
-		this.posY = y;
 	}
 
 }

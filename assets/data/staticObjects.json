@@ -1,18 +1,18 @@
-[{
-  "spritePath": "object/stone.png",
-  "sizeX": 64,
-  "sizeY": 64,
-  "originX": 32,
-  "originY": 32,
-  "isTraversable": false
-},
-  {
+{
+  "stone": {
+    "spritePath": "object/stone.png",
+    "sizeX": 64,
+    "sizeY": 64,
+    "originX": 32,
+    "originY": 32,
+    "isTraversable": false
+  },
+  "bush": {
     "spritePath": "object/bush.png",
     "sizeX": 32,
     "sizeY": 32,
     "originX": 16,
-    "originY":16,
+    "originY": 16,
     "isTraversable": true
   }
-
-]
+}

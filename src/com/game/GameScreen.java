@@ -75,10 +75,10 @@ public class GameScreen implements Screen {
 		level.PersonGroup.addActor(Person1);
 		level.PersonGroup.addActor(Person2);
 
-		objectCreator.createObject(3, 3, 0);
-		objectCreator.createObject(8, 3, 0);
-		objectCreator.createObject(3, 8, 0);
-		objectCreator.createObject(3, 7, 1);
+		objectCreator.createObject(3, 3, "stone");
+		objectCreator.createObject(8, 3, "stone");
+		objectCreator.createObject(3, 8, "stone");
+		objectCreator.createObject(3, 7, "bush");
 	}
 
 
