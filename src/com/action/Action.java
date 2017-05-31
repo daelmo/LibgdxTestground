@@ -1,7 +1,7 @@
 package com.action;
 
 public interface Action {
-	void execute(float delta);
-	boolean checkCondition();
-	String toString();
+	public void execute(float delta);
+	public boolean checkCondition();
+	public String toString();
 }

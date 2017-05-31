@@ -4,17 +4,23 @@ public class Statistic {
 	private Person person;
 	public float walkingSpeed = 60f;
 	public float hungerRate = 3;
-	public float health = FULLHEALTH;
-	public float satiety = FULLSATIETY;
+	public float stressingRate = 3;
+	public float health = FULL_HEALTH;
+	public float satiety = FULL_SATIETY;
+	public float relaxation = FULL_RELAXATION;
 
 
-	public static final float FULLHEALTH = 100;
+	public static final float FULL_HEALTH = 100;
 	public static final float UNCONSCIOUS = 35;
 	public static final float DEAD = 0;
 
-	public static final float FULLSATIETY = 100;
-	public static final float LOWSATIETY = 35;
-	public static final float NOSATIETY = 0;
+	public static final float FULL_SATIETY = 100;
+	public static final float HUNGRY = 35;
+	public static final float URGENTLY_HUNGRY = 0;
+
+	public static final float FULL_RELAXATION = 100;
+	public static final float STRESSED = 35;
+	public static final float CRAZY = 0;
 
 	public Statistic(Person person){
 		this.person = person;
@@ -24,7 +30,8 @@ public class Statistic {
 		if(satiety <= 0){
 			takeDamage( delta * 1);
 		}
-		beHungry();
+		becomeHungry(delta);
+		becomeStressed(delta);
 	}
 
 	public void takeDamage(float damage){
@@ -37,8 +44,13 @@ public class Statistic {
 		}
 	}
 
-	private void beHungry(){
-		satiety = Math.max(satiety - hungerRate, 0);
+	private void becomeHungry(float delta){
+		satiety = Math.max(satiety - hungerRate * delta, 0);
+	}
+
+	private void becomeStressed(float delta){
+		relaxation = Math.max(relaxation - stressingRate*delta, 0);
+
 	}
 
 }

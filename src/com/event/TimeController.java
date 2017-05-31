@@ -43,6 +43,10 @@ public class TimeController {
 	}
 
 	public String toString(){
-		return currentDate.toString();
+		return currentDate.toString() + " " + getCurrentHour() + " h";
+	}
+
+	public int getCurrentHour(){
+		return Math.round(currentSeconds/SECONDS_PER_DAY*24);
 	}
 }

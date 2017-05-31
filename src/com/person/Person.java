@@ -1,5 +1,6 @@
 package com.person;
 
+import com.action.Action;
 import com.action.Walking;
 import com.action.Scheduler;
 import com.badlogic.gdx.Gdx;
@@ -30,7 +31,7 @@ public class Person extends Actor {
 	private Scheduler scheduler;
 	private final float shakeAmplitude = 5.0f;
 	private float rotation = 0;
-	private ArrayList<Walking> actions = new ArrayList<Walking>();
+	private ArrayList<Action> actions = new ArrayList<Action>();
 	private Group FontGroup = new Group();
 	public ActorFont printName;
 	private Gender gender;

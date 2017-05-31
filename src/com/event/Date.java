@@ -7,7 +7,7 @@ public class Date {
 	public int day;
 	public int year;
 	public static final int DAYS_PER_SEASON = 30;
-	public static final int SECONDS_PER_DAY = 10;
+	public static final int SECONDS_PER_DAY = 30;
 	public static final int SEASONS_PER_YEAR = Season.values().length;
 
 	public Date(int year, Season season, int day){

@@ -24,7 +24,7 @@ public class PersonBuilder {
 	public Person generateActivePerson(PersonGrowth growth){
 		Person person = new Person(stage, growth, font);
 		person.setBirthday(timeController.generateBirthday(growth));
-		person.setScheduler(ActiveScheduler.getScheduler());
+		person.setScheduler(ActiveScheduler.getScheduler(timeController));
 		String name= nameGen.generatePersonName(Gender.MALE);
 		person.setName(name);
 		person.setPersonBody(new PersonBody(growth));
