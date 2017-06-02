@@ -38,7 +38,6 @@ public class GameScreen implements Screen {
 	public TimeBox timeBox;
 
 
-
 	public GameScreen(final LibgdxTest main) {
 		this.main = main;
 
@@ -46,7 +45,7 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor(gameInputProcessor);
 
 		//build camera settings
-		viewport= new customScreenViewport();
+		viewport = new customScreenViewport();
 		stage = new Stage(viewport);
 		viewport.setStage(stage);
 		float w = Gdx.graphics.getWidth();
@@ -68,17 +67,16 @@ public class GameScreen implements Screen {
 
 
 		//init Scenario
-		Person Person1 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
-		Person Person2 = personBuilder.generateActivePerson(PersonGrowth.ADULT);
-		level.personGroup.addActor(Person1);
-		level.personGroup.addActor(Person2);
+		personBuilder.generateActivePerson(PersonGrowth.ADULT);
+		personBuilder.generateActivePerson(PersonGrowth.ADULT);
 
-		objectCreator.createObject(3, 3, "stone");
+		objectCreator.createObject(5, 3, "stone");
 		objectCreator.createObject(8, 3, "stone");
 		objectCreator.createObject(3, 8, "stone");
 		objectCreator.createObject(3, 7, "bush");
-	}
 
+
+	}
 
 
 	public void render(float delta) {
