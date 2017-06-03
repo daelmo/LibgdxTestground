@@ -1,5 +1,6 @@
 package com.level;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.game.Constants;
@@ -44,6 +45,11 @@ public class Level {
 	}
 
 	public boolean isTraversable(int x, int y) {
+		//check if position is in Level
+		if (x > Constants.LEVEL_WIDTH || y > Constants.LEVEL_HEIGHT || x < 0 || y < 0) {
+			return false;
+		}
+
 		Tile t = traversableMap[x][y];
 		for (boolean traversable : t.isTraversable) {
 			if (traversable == false) {

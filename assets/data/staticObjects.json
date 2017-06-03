@@ -5,7 +5,10 @@
     "sizeY": 64,
     "originX": 32,
     "originY": 32,
-    "isTraversable": false
+    "isTraversable": false,
+    "blockedArea": [
+      [0,0]
+    ]
   },
   "bush": {
     "spritePath": "object/bush.png",
@@ -13,6 +16,9 @@
     "sizeY": 64,
     "originX": 32,
     "originY": 32,
-    "isTraversable": true
+    "isTraversable": true,
+    "blockedArea":[
+       [0,0]
+    ]
   }
 }

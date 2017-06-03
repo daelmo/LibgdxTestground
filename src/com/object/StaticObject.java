@@ -13,6 +13,7 @@ public class StaticObject extends Actor {
 	private String spritePath;
 	private MapSprite sprite;
 	private int posX, posY;
+	private int[][] blockedArea;
 	private int zIndex = Constants.STATIC_OBJECT_ZINDEX;
 
 	public StaticObject createCopyAt(int x, int y){
@@ -23,6 +24,7 @@ public class StaticObject extends Actor {
 		object.originX = this.originX;
 		object.originY = this.originY;
 		object.isTraversable = this.isTraversable;
+		object.blockedArea = this.blockedArea;
 		object.posX = x;
 		object.posY = y;
 		return object;
@@ -34,6 +36,10 @@ public class StaticObject extends Actor {
 		sprite.setOrigin(originX,originY);
 		sprite.setZIndex(zIndex);
 		sprite.draw(batch);
+	}
+
+	public int[][] getBlockedArea(){
+		return blockedArea;
 	}
 
 }
