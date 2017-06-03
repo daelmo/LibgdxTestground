@@ -15,21 +15,22 @@ public class Walking implements Action{
 
 	public void execute(float delta){
 		float wholeX,wholeY, stepX, stepY;
+		double distance;
+		float necessarySteps;
 		wholeX= goalPosition.getFloatX() - person.getPosition().getFloatX();
 		wholeY= goalPosition.getFloatY() - person.getPosition().getFloatY();
 
-		//calculate step per frame
-		if(Math.abs(wholeX) < person.statistic.walkingSpeed){
-			stepX = wholeX;
+		distance = Math.sqrt( wholeX*wholeX + wholeY*wholeY);
+
+		if(distance >= person.statistic.walkingSpeed){
+			necessarySteps = Math.round(distance/person.statistic.walkingSpeed);
+			stepX = (wholeX/necessarySteps);
+			stepY = (wholeY/necessarySteps);
 		}else{
-			stepX = Math.signum(wholeX) * person.statistic.walkingSpeed;
+			stepX = wholeX;
+			stepY = wholeY;
 		}
 
-		if(Math.abs(wholeY) < person.statistic.walkingSpeed){
-			stepY = wholeY;
-		}else{
-			stepY = Math.signum(wholeY) * person.statistic.walkingSpeed;
-		}
 
 		//set Viewdirection for step
 		if(stepY > 0){ person.setViewDirection(ViewDirection.top);}

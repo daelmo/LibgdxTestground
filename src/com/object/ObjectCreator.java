@@ -21,7 +21,7 @@ public class ObjectCreator {
 		templateObjects = json.fromJson(HashMap.class, StaticObject.class, Gdx.files.internal("data/staticObjects.json"));
 
 		if(templateObjects == null){
-			Gdx.app.debug(this.getClass().getName(), "templateObjects could not be load from file");
+			Gdx.app.debug(this.getClass().getName(), "templateObjects could not be load from file   ");
 		}
 	}
 
