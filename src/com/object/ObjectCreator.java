@@ -18,7 +18,10 @@ public class ObjectCreator {
 	public ObjectCreator(Level level, Stage stage) {
 		this.level = level;
 		this.stage = stage;
-		templateObjects = json.fromJson(HashMap.class, StaticObject.class, Gdx.files.internal("data/staticObjects.json"));
+		templateObjects = json.fromJson(
+				HashMap.class,
+				StaticObject.class,
+				Gdx.files.internal("data/staticObjects.json"));
 
 		if (templateObjects == null) {
 			Gdx.app.debug(this.getClass().getName(), "templateObjects could not be load from file   ");

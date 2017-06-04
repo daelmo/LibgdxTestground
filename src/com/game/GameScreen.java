@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
 	public TimeBox timeBox;
 
 
-	public GameScreen(final LibgdxTest main) {
+	public GameScreen(LibgdxTest main) {
 		this.main = main;
 
 		this.gameInputProcessor = new GameInputProcessor(this);
@@ -70,12 +70,11 @@ public class GameScreen implements Screen {
 		personBuilder.generateActivePerson(PersonGrowth.ADULT);
 		personBuilder.generateActivePerson(PersonGrowth.ADULT);
 
-		objectCreator.createObject(5, 3, "stone");
 		objectCreator.createObject(8, 3, "stone");
 		objectCreator.createObject(3, 8, "stone");
+		objectCreator.createObject(5, 3, "stone");
 		objectCreator.createObject(3, 7, "bush");
-
-
+		
 	}
 
 

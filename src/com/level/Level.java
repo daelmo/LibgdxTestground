@@ -63,6 +63,7 @@ public class Level {
 		traversableMap[x][y].setTraversable(z, bool);
 	}
 
+	
 	private void generateTraversableMap(){
 		traversableMap = new Tile[Constants.LEVEL_WIDTH][Constants.LEVEL_HEIGHT];
 		for (int x = 0; x < Constants.LEVEL_WIDTH; x++) {
@@ -72,6 +73,7 @@ public class Level {
 		}
 	}
 
+	//generate Floor Actor for whole level area
 	private void generateFloor(){
 		for (int x = 0; x < Constants.LEVEL_WIDTH; x++) {
 			for (int y = 0; y < Constants.LEVEL_HEIGHT; y++) {

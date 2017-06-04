@@ -15,6 +15,7 @@ public class ActiveScheduler implements Scheduler {
 		this.timeController = timeController;
 	}
 
+	//get next Action for Person
 	public Action getAction(Person person) {
 		if(timeController.getCurrentHour() > 23 || timeController.getCurrentHour() < 6){
 			return new Resting(person, timeController);

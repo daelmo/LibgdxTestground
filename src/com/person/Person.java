@@ -1,7 +1,6 @@
 package com.person;
 
 import com.action.Action;
-import com.action.Walking;
 import com.action.Scheduler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -57,8 +56,8 @@ public class Person extends Actor {
 	}
 
 	public void movePosition(float X, float Y) {
-		this.position.addFloatX(X);
-		this.position.addFloatY(Y);
+		this.position.addX(X);
+		this.position.addY(Y);
 	}
 
 

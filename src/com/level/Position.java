@@ -5,55 +5,55 @@ import com.game.Constants;
 import java.util.Random;
 
 public class Position {
-	private float X;
-	private float Y;
+	private float x;
+	private float y;
 
-	public Position(float X, float Y) {
-		this.X = X;
-		this.Y = Y;
+	public Position(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	public int getIntX() {
-		return (int) X;
+		return (int) x;
 	}
 
 	public int getIntY() {
-		return (int) Y;
+		return (int) y;
 	}
 
 	public float getFloatX() {
-		return X;
+		return x;
 	}
 
 	public float getFloatY() {
-		return Y;
+		return y;
 	}
 
-	public void setFloatX(float X) {
-		this.X = X;
+	public void setX(float x) {
+		this.x = x;
 	}
 
-	public void setFloatY(float Y) {
-		this.X = Y;
+	public void setY(float y) {
+		this.x = y;
 	}
 
-	public void addFloatX(float X) {
-		this.X += X;
+	public void addX(float x) {
+		this.x += x;
 	}
 
-	public void addFloatY(float Y) {
-		this.Y += Y;
+	public void addY(float y) {
+		this.y += y;
 	}
 
 	@Override
 	public String toString() {
-		return this.X + " " + this.Y;
+		return this.x + " " + this.y;
 	}
 
 	// stop action when true, go on when false
 	public boolean compareTo(Position position) {
-		if (Math.abs(this.X - position.X) > 1.9f) return false;
-		if (Math.abs(this.Y - position.Y) > 1.9f) return false;
+		if (Math.abs(this.x - position.x) > 3.9f) return false;
+		if (Math.abs(this.y - position.y) > 3.9f) return false;
 		return true;
 	}
 
