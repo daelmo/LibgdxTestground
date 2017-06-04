@@ -1,4 +1,4 @@
-package com.gui;
+package com.person;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;

@@ -5,9 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.TimeController;
 import com.game.ActorFont;
-import com.level.Level;
 import com.level.Position;
-import com.gui.PersonBody;
 
 
 public class PersonBuilder {
