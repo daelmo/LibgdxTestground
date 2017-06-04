@@ -13,7 +13,6 @@ import com.event.TimeController;
 import com.gui.TimeBox;
 import com.level.Level;
 import com.object.ObjectCreator;
-import com.person.Person;
 import com.person.PersonBuilder;
 import com.person.PersonGrowth;
 
@@ -33,7 +32,7 @@ public class GameScreen implements Screen {
 
 	public OrthographicCamera camera;
 	public GameInputProcessor gameInputProcessor;
-	public customScreenViewport viewport;
+	public CustomScreenViewport viewport;
 
 	public TimeBox timeBox;
 
@@ -45,7 +44,7 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor(gameInputProcessor);
 
 		//build camera settings
-		viewport = new customScreenViewport();
+		viewport = new CustomScreenViewport();
 		stage = new Stage(viewport);
 		viewport.setStage(stage);
 		float w = Gdx.graphics.getWidth();

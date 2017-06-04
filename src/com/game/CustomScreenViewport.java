@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class customScreenViewport extends ScreenViewport {
+public class CustomScreenViewport extends ScreenViewport {
 	Stage stage;
 	OrthographicCamera camera;
 	static final float CAMERA_ZOOM_MIN = 1.0f;

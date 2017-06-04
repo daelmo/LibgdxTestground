@@ -11,7 +11,7 @@ public class MenuScreen implements Screen{
 
 	public OrthographicCamera camera;
 	public MenuInputProcessor menuInputProcessor;
-	public customScreenViewport viewport;
+	public CustomScreenViewport viewport;
 	public Stage stage;
 
 	public MenuScreen(final LibgdxTest main){
@@ -26,7 +26,7 @@ public class MenuScreen implements Screen{
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
 		camera.update();
 
-		viewport= new customScreenViewport();
+		viewport= new CustomScreenViewport();
 		stage = new Stage(viewport);
 		viewport.setStage(stage);
 	}
