@@ -11,9 +11,9 @@ public class MapSprite extends Actor{
 	public Sprite sprite;
 	public Texture texture;
 	
-	public MapSprite(String path){
+	public MapSprite(String path, int imgWidth, int imgHeight){
 		texture = new Texture(Gdx.files.internal(path));
-		sprite = new Sprite(texture, 0, 0, Constants.TILE_WIDTH, Constants.TILE_HEIGHT);
+		sprite = new Sprite(texture, 0, 0,imgWidth, imgHeight);
 	}
 	
 	public void draw(Batch batch){

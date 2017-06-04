@@ -7,7 +7,7 @@ import com.level.MapSprite;
 
 public class StaticObject extends Actor {
 
-	private int sizeX, sizeY;
+	private int imageWidth, imageHeight;
 	private int originX, originY;
 	private boolean isTraversable;
 	private String spritePath;
@@ -19,8 +19,8 @@ public class StaticObject extends Actor {
 	public StaticObject createCopyAt(int x, int y){
 		StaticObject object = new StaticObject();
 		object.spritePath = this.spritePath;
-		object.sizeX = this.sizeX;
-		object.sizeY = this.sizeY;
+		object.imageWidth = this.imageWidth;
+		object.imageHeight = this.imageHeight;
 		object.originX = this.originX;
 		object.originY = this.originY;
 		object.isTraversable = this.isTraversable;
@@ -31,7 +31,7 @@ public class StaticObject extends Actor {
 	}
 
 	public void draw(Batch batch, float alpha) {
-		sprite = new MapSprite(spritePath);
+		sprite = new MapSprite(spritePath, imageWidth, imageHeight);
 		sprite.setPosition(posX * Constants.TILE_WIDTH, posY * Constants.TILE_HEIGHT);
 		sprite.setOrigin(originX,originY);
 		sprite.setZIndex(zIndex);

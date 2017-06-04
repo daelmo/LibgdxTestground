@@ -1,8 +1,8 @@
 {
   "stone": {
     "spritePath": "object/stone.png",
-    "sizeX": 64,
-    "sizeY": 64,
+    "imageWidth": 64,
+    "imageHeight": 64,
     "originX": 32,
     "originY": 32,
     "isTraversable": false,
@@ -12,13 +12,24 @@
   },
   "bush": {
     "spritePath": "object/bush.png",
-    "sizeX": 64,
-    "sizeY": 64,
+    "imageWidth": 64,
+    "imageHeight": 64,
     "originX": 32,
     "originY": 32,
     "isTraversable": true,
     "blockedArea":[
        [0,0]
+    ]
+  },
+  "tree": {
+    "spritePath": "object/tree.png",
+    "imageWidth": 192,
+    "imageHeight": 256,
+    "originX": 96,
+    "originY": 40,
+    "isTraversable": false,
+    "blockedArea":[
+      [0,0]
     ]
   }
 }

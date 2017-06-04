@@ -12,8 +12,13 @@ public class Floor extends Actor {
 	public Floor(int posX, int posY) {
 		this.posX = posX;
 		this.posY = posY;
-		sprite = new MapSprite("floor/earth.png");
-		sprite.setPosition(posX * Constants.TILE_WIDTH, posY * Constants.TILE_HEIGHT);
+		sprite = new MapSprite(
+				"floor/earth.png",
+				Constants.TILE_WIDTH,
+				Constants.TILE_HEIGHT);
+		sprite.setPosition(
+				posX * Constants.TILE_WIDTH,
+				posY * Constants.TILE_HEIGHT);
 		sprite.setZIndex(zIndex);
 	}
 
