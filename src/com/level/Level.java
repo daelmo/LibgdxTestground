@@ -81,4 +81,18 @@ public class Level {
 			}
 		}
 	}
+
+	public void printTraversableMap(){
+		for(int y= Constants.LEVEL_HEIGHT -1; y>0;y--){
+			for (int x=0; x<Constants.LEVEL_WIDTH;x++){
+				if(isTraversable(x,y)){
+					System.out.print("O");
+				}else{
+					System.out.print("-");
+				}
+			}
+			System.out.print("\n");
+		}
+		System.out.print("\n");
+	}
 }
