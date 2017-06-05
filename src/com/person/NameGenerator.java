@@ -10,16 +10,18 @@ import javafx.stage.Stage;
 import java.util.*;
 
 public class NameGenerator {
-	private ArrayList<String> femalePersonNames;
-	private ArrayList<String> malePersonNames;
+	private List<String> femalePersonNames;
+	private List<String> malePersonNames;
 	private ListIterator<String> femalePersonNameIterator;
 	private ListIterator<String> malePersonNameIterator;
 
 	public NameGenerator() {
 		JsonValue json = new JsonReader().parse(Gdx.files.internal("data/names.json"));
 		JsonValue.JsonIterator it = json.iterator();
-		femalePersonNames = new ArrayList<>(Arrays.asList(it.next().asStringArray()));
-		malePersonNames = new ArrayList<>(Arrays.asList(it.next().asStringArray()));
+		String[] fpNames = json.get("femalePersonNames").asStringArray();
+		femalePersonNames = Arrays.asList(fpNames);
+		String[] mpNames = json.get("malePersonNames").asStringArray();
+		malePersonNames = Arrays.asList(mpNames);
 		Collections.shuffle(femalePersonNames);
 		Collections.shuffle(malePersonNames);
 		femalePersonNameIterator = femalePersonNames.listIterator();
