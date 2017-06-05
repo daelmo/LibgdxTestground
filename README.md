@@ -12,7 +12,7 @@ For the implementation using Java and the game engine libGDX.
 * grit for traversability is implemented
 * settings are loaded from a properties file
 * implements stats for a person: walkingSpeed, hunger and hungerRate
-* implement state machine for actor : dead, unconscious, working, sleeping
+* implement personState machine for actor : dead, unconscious, working, sleeping
 * implemented straight path finding
 * implemented dumb task scheduler for an person
 * loading names for characters from JSON-file, assigning one randomly
@@ -24,7 +24,7 @@ For the implementation using Java and the game engine libGDX.
 
 * setting borders for scrolling of screen
 * drawing images for different growth of person
-* implement activity KI for working state
+* implement activity KI for working personState
 * implement activity "walking" with A* path finding
 * implement routines (like cooking) using a set of activities
 * implement day structure ( sleep time, work time, meal schedule)

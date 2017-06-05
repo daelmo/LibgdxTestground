@@ -4,10 +4,8 @@ import com.action.Action;
 import com.action.Scheduler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Date;
 import com.game.ActorFont;
@@ -16,28 +14,24 @@ import com.level.Position;
 import java.util.ArrayList;
 
 public class Person extends Actor {
-	public String name;
-	public Date birthday;
+	private String name;
+	private Date birthday;
 	private Position position;
 	private PersonBody personBody;
 	public ViewDirection view = ViewDirection.left;
-	private State state = State.active;
+	private PersonState personState = PersonState.active;
 	public Statistic statistic;
 	private PersonGrowth growth;
 	private Stage stage;
-	private BitmapFont font;
 	private Scheduler scheduler;
 	private final float shakeAmplitude = 5.0f;
 	private float rotation = 0;
 	private ArrayList<Action> actions = new ArrayList<Action>();
-	private Group FontGroup = new Group();
-	public ActorFont printName;
+	private ActorFont printName;
 	private Gender gender;
 
 
-	public Person(Stage stage, PersonGrowth growth, BitmapFont font) {
-		stage.addActor(FontGroup);
-		stage.addActor(this);
+	public Person(Stage stage, PersonGrowth growth) {
 		this.growth = growth;
 	}
 
@@ -62,16 +56,16 @@ public class Person extends Actor {
 
 	@Override
 	public void draw(Batch batch, float alpha) {
-		if (state == State.active) {
+		if (personState == PersonState.active) {
 			personBody.draw(batch, alpha, position, view, 0f);
 		}
-		if (state == State.unconscious) {
+		if (personState == PersonState.unconscious) {
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
 
 			personBody.draw(batch, alpha, position, view, -90f + MathUtils.sin(rotation) * shakeAmplitude);
 		}
-		if (state == State.dead) {
+		if (personState == PersonState.dead) {
 			rotation = (rotation + Gdx.graphics.getDeltaTime() * 5f);
 			view = ViewDirection.left;
 			personBody.draw(batch, alpha, position, view, -90f);
@@ -80,7 +74,7 @@ public class Person extends Actor {
 
 	@Override
 	public void act(float delta) {
-		if (state == State.active) {
+		if (personState == PersonState.active) {
 			if (actions.isEmpty()) {
 				actions.add(scheduler.getAction(this));
 			}
@@ -93,8 +87,8 @@ public class Person extends Actor {
 		}
 	}
 
-	public void setState(State state) {
-		this.state = state;
+	public void setPersonState(PersonState personState) {
+		this.personState = personState;
 	}
 
 	public void setStage(Stage stage) {
@@ -106,8 +100,8 @@ public class Person extends Actor {
 	}
 
 
-	public State getState() {
-		return state;
+	public PersonState getPersonState() {
+		return personState;
 	}
 
 	public void setStatistic(Statistic statistic) {
@@ -122,16 +116,20 @@ public class Person extends Actor {
 		this.name = name;
 	}
 
-	public void addText(ActorFont actorFont){
-		FontGroup.addActor(actorFont);
-	}
-
 	public void setViewDirection(ViewDirection viewDirection){
 		this.view = viewDirection;
 	}
 
 	public void setGender(Gender gender){
 		this.gender = gender;
+	}
+
+	public void setPrintName(ActorFont printName){
+		this.printName = printName;
+	}
+
+	public ActorFont getPrintName(){
+		return printName;
 	}
 
 }

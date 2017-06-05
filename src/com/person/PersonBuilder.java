@@ -21,17 +21,21 @@ public class PersonBuilder {
 	}
 
 	public void generateActivePerson(PersonGrowth growth){
-		Person person = new Person(stage, growth, font);
-		person.setBirthday(timeController.generateBirthday(growth));
-		person.setScheduler(ActiveScheduler.getScheduler(timeController));
+		Person person = new Person(stage, growth);
+
 		String name= nameGen.generatePersonName(Gender.MALE);
 		person.setName(name);
+		person.setPrintName(new ActorFont(font, name, -5, 5));
+
 		person.setPersonBody(new PersonBody(growth));
 		person.setStatistic(new Statistic(person));
 		person.setGender(Gender.MALE);
-		person.printName = new ActorFont(font, name, -5, 5);
-		person.addText(person.printName);
+
 		person.setPosition(Position.getRandomPosition());
+		person.setBirthday(timeController.generateBirthday(growth));
+		person.setScheduler(ActiveScheduler.getScheduler(timeController));
+
 		stage.addActor(person);
+		stage.addActor(person.getPrintName());
 	}
 }
