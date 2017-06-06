@@ -3,7 +3,6 @@ package com.action;
 import com.level.Position;
 import com.person.Person;
 import com.person.ViewDirection;
-import javafx.geometry.Pos;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -12,13 +11,13 @@ import java.util.ListIterator;
 public class Walking implements Action{
 	private Person person;
 	private Position currentGoalPosition;
-	private List<Position> intermediatePositions;
+	private List<Position> plannedRoute;
 	private ListIterator<Position> iterator;
 
 	public Walking(Person person, Position goalPosition) {
 		this.person = person;
-		this.intermediatePositions = getIntermediatePositions(goalPosition);
-		this.iterator = intermediatePositions.listIterator();
+		this.plannedRoute = calculatePlannedRoute(goalPosition);
+		this.iterator = plannedRoute.listIterator();
 		this.currentGoalPosition = iterator.next();
 	}
 
@@ -37,8 +36,7 @@ public class Walking implements Action{
 
 	//becomes true when position is reached
 	public boolean checkCondition(){
-		Position finalPosition = intermediatePositions.get(intermediatePositions.size() - 1);
-		return finalPosition.compareTo(person.getPosition());
+		return currentGoalPosition.compareTo(person.getPosition()) && !iterator.hasNext();
 	}
 
 	@Override
@@ -68,7 +66,7 @@ public class Walking implements Action{
 	}
 
 
-	//sets Viewdirection for calculated step
+	//sets ViewDirection for calculated step
 	private void calculateViewDirection(Position currentGoalPosition){
 		float deltaX, deltaY, slope;
 		deltaX = currentGoalPosition.getFloatX() - person.getPosition().getFloatX();
@@ -90,9 +88,14 @@ public class Walking implements Action{
 		}
 	}
 
-	public List<Position> getIntermediatePositions(Position goalPosition){
+	public List<Position> getPlannedRoute() {
+		return plannedRoute;
+	}
+
+	public List<Position> calculatePlannedRoute(Position goalPosition) {
 		List<Position> list = new LinkedList<>();
 		list.add(goalPosition);
+		list.add(Position.getRandomPosition());
 		return list;
 	}
 }
