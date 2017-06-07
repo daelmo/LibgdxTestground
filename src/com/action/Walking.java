@@ -22,16 +22,14 @@ public class Walking implements Action{
 	public Walking(Person person, Position finalGoalPosition, Level level) {
 		this.person = person;
 		this.level = level;
-		this.plannedRoute = calculatePlannedRoute(finalGoalPosition);
-		this.iterator = plannedRoute.listIterator();
-		this.currentGoalPosition = iterator.next();
+
 		this.uncheckedNodes = new HashMap<>();
 		this.checkedNodes = new HashMap<>();
 		this.startCoorinates=new Pair<Integer,Integer>(
 				person.getPosition().getIntX() / Constants.TILE_WIDTH,
 				person.getPosition().getIntY() / Constants.TILE_HEIGHT);
 		this.goalCoordinates=new Pair<Integer, Integer>(
-				finalGoalPosition.getIntX() / Constants.TILE_WIDTH,
+				(int) finalGoalPosition.getIntX() / Constants.TILE_WIDTH,
 				finalGoalPosition.getIntY() / Constants.TILE_HEIGHT);
 		this.uncheckedNodes.put(
 				startCoorinates,
@@ -39,7 +37,10 @@ public class Walking implements Action{
 						null,
 						calculateHeuristic(startCoorinates, goalCoordinates),
 						0 ));
-		//System.out.println(performAStar());
+		this.plannedRoute = calculatePlannedRoute(finalGoalPosition);
+		this.iterator = plannedRoute.listIterator();
+		this.currentGoalPosition = iterator.next();
+
 
 	}
 
@@ -115,6 +116,9 @@ public class Walking implements Action{
 	}
 
 	public List<Position> calculatePlannedRoute(Position goalPosition) {
+		ArrayList<Node> points = performAStar();
+
+
 		List<Position> list = new LinkedList<>();
 		list.add(goalPosition);
 		return list;
@@ -138,8 +142,8 @@ public class Walking implements Action{
 			positionY = node.currentCoordinates.getValue() + deltaPosition[1] ;
 			if(!level.isInLevel(positionX, positionY)){continue;}
 			if(!level.isTraversable(positionX, positionY)){continue;}
-			if(uncheckedNodes.get(new Pair(positionX,positionY)) == null){continue;}
-			if(checkedNodes.get(new Pair(positionX,positionY)) == null){continue;}
+			if(uncheckedNodes.get(new Pair(positionX,positionY)) != null){continue;}
+			if(checkedNodes.get(new Pair(positionX,positionY)) != null){continue;}
 
 			Pair newCoordinates = new Pair(positionX, positionY);
 			Node newNode = new Node(
@@ -157,7 +161,9 @@ public class Walking implements Action{
 	}
 
 	private ArrayList<Node> performAStar(){
-		while(Collections.min(uncheckedNodes.values()).currentCoordinates != goalCoordinates){
+
+
+		while(((Collections.min(uncheckedNodes.values())).currentCoordinates != goalCoordinates)){
 			Node node = Collections.min(uncheckedNodes.values());
 			checkNode(node);
 		}
