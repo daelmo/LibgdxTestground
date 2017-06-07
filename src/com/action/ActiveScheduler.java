@@ -2,6 +2,7 @@ package com.action;
 
 import com.event.TimeController;
 import com.game.Constants;
+import com.level.Level;
 import com.level.Position;
 import com.level.Tile;
 import com.person.Person;
@@ -10,8 +11,10 @@ import java.util.Random;
 public class ActiveScheduler implements Scheduler {
 	private static Scheduler scheduler;
 	private TimeController timeController;
+	private Level level;
 
-	public ActiveScheduler(TimeController timeController){
+	public ActiveScheduler(TimeController timeController, Level level){
+		this.level = level;
 		this.timeController = timeController;
 	}
 
@@ -21,13 +24,7 @@ public class ActiveScheduler implements Scheduler {
 			return new Resting(person, timeController);
 		}
 
-		return new Walking(person, Position.getRandomPosition());
+		return new Walking(person, Position.getRandomPosition(), level);
 	}
 
-	public static Scheduler getScheduler(TimeController timeController){
-		if(scheduler == null){
-			scheduler = new ActiveScheduler(timeController);
-		}
-		return scheduler;
-	}
 }

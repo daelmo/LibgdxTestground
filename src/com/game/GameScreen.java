@@ -59,7 +59,7 @@ public class GameScreen implements Screen {
 		rayHandler = new RayHandler(world);
 		timeController = new TimeController(rayHandler, Season.spring);
 		objectCreator = new ObjectCreator(level, stage);
-		personBuilder = new PersonBuilder(timeController, stage, main.font);
+		personBuilder = new PersonBuilder(timeController, stage, main.font, level);
 
 		//initGui
 		timeBox = new TimeBox(timeController, stage, main.font);

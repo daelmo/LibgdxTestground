@@ -1,9 +1,11 @@
 package com.action;
 
+import com.level.Level;
 import com.level.Position;
 import com.person.Person;
 import com.person.ViewDirection;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -13,9 +15,11 @@ public class Walking implements Action{
 	private Position currentGoalPosition;
 	private List<Position> plannedRoute;
 	private ListIterator<Position> iterator;
+	private Level level;
 
-	public Walking(Person person, Position goalPosition) {
+	public Walking(Person person, Position goalPosition, Level level) {
 		this.person = person;
+		this.level = level;
 		this.plannedRoute = calculatePlannedRoute(goalPosition);
 		this.iterator = plannedRoute.listIterator();
 		this.currentGoalPosition = iterator.next();
@@ -99,11 +103,34 @@ public class Walking implements Action{
 		return list;
 	}
 
-	private int calculateHeuristicFor(Position position, Position goalPosition){
+	private int calculateHeuristic(Position position, Position goalPosition){
 		int deltaX = Math.abs(goalPosition.getIntX() - position.getIntX());
 		int deltaY = Math.abs(goalPosition.getIntY() - position.getIntY());
 		int straight = Math.max(deltaY,deltaX) - Math.min(deltaY, deltaX);
 		int diagonal = Math.min(deltaX, deltaY);
 		return straight + diagonal;
 	}
+
+	private List<Node> checkNode(Node node){
+		int positionX, positionY;
+		int[][] deltaNeighbourPositions =
+				{{0,1}, {1,1}, {1,0}, {1,-1}, {0, -1}, {-1,-1}, {-1,0}, {-1, 1} };
+		for (int[] deltaPosition : deltaNeighbourPositions){
+			positionX = node.position.getIntX()+deltaPosition[0];
+			positionY = node.position.getIntY()+deltaPosition[1];
+			if(!level.isTraversable(positionX, positionY)){continue;}
+
+
+		}
+		return new ArrayList<Node>();
+	}
+
+
+	private class Node{
+		Position position;
+		Position originPosition;
+		int score;
+	}
+
+
 }

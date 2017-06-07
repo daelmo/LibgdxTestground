@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.TimeController;
 import com.game.ActorFont;
+import com.level.Level;
 import com.level.Position;
 
 
@@ -13,11 +14,13 @@ public class PersonBuilder {
 	private TimeController timeController;
 	private Stage stage;
 	private BitmapFont font;
+	private Level level;
 
-	public PersonBuilder(TimeController timeController, Stage stage, BitmapFont font){
+	public PersonBuilder(TimeController timeController, Stage stage, BitmapFont font, Level level){
 		this.timeController = timeController;
 		this.font = font;
 		this.stage = stage;
+		this.level = level;
 	}
 
 	public void generateActivePerson(PersonGrowth growth){
@@ -33,7 +36,7 @@ public class PersonBuilder {
 
 		person.setPosition(Position.getRandomPosition());
 		person.setBirthday(timeController.generateBirthday(growth));
-		person.setScheduler(ActiveScheduler.getScheduler(timeController));
+		person.setScheduler(new ActiveScheduler(timeController, level));
 
 		stage.addActor(person);
 		stage.addActor(person.getPrintName());
