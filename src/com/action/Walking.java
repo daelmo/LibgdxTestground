@@ -98,4 +98,12 @@ public class Walking implements Action{
 		list.add(Position.getRandomPosition());
 		return list;
 	}
+
+	private int calculateHeuristicFor(Position position, Position goalPosition){
+		int deltaX = Math.abs(goalPosition.getIntX() - position.getIntX());
+		int deltaY = Math.abs(goalPosition.getIntY() - position.getIntY());
+		int straight = Math.max(deltaY,deltaX) - Math.min(deltaY, deltaX);
+		int diagonal = Math.min(deltaX, deltaY);
+		return straight + diagonal;
+	}
 }
