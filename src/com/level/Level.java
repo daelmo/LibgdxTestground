@@ -46,7 +46,7 @@ public class Level {
 
 	public boolean isTraversable(int x, int y) {
 		//check if position is in Level
-		if (x > Constants.LEVEL_WIDTH || y > Constants.LEVEL_HEIGHT || x < 0 || y < 0) {
+		if (!isInLevel(x,y)) {
 			return false;
 		}
 
