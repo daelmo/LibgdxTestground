@@ -1,5 +1,6 @@
 package com.action;
 
+import com.game.Constants;
 import com.level.Level;
 import com.level.Position;
 import com.person.Person;
@@ -14,6 +15,7 @@ public class Walking implements Action{
 	private List<Position> plannedRoute;
 	private ListIterator<Position> iterator;
 	private Level level;
+	private Pair<Integer,Integer> startCoorinates, goalCoordinates;
 	private Map<Pair<Integer,Integer>, Node> uncheckedNodes;
 	private Map<Pair<Integer,Integer>, Node> checkedNodes ;
 
@@ -25,8 +27,20 @@ public class Walking implements Action{
 		this.currentGoalPosition = iterator.next();
 		this.uncheckedNodes = new HashMap<>();
 		this.checkedNodes = new HashMap<>();
-		this.uncheckedNodes.put(new Pair(0,0), new Node(0,0,0));
-		//System.out.println(Collections.min(uncheckedNodes.values())  + " 2");
+		this.startCoorinates=new Pair<Integer,Integer>(
+				person.getPosition().getIntX() / Constants.TILE_WIDTH,
+				person.getPosition().getIntY() / Constants.TILE_HEIGHT);
+		this.goalCoordinates=new Pair<Integer, Integer>(
+				finalGoalPosition.getIntX() / Constants.TILE_WIDTH,
+				finalGoalPosition.getIntY() / Constants.TILE_HEIGHT);
+		this.uncheckedNodes.put(
+				startCoorinates,
+				new Node(startCoorinates,
+						null,
+						calculateHeuristic(startCoorinates, goalCoordinates),
+						0 ));
+		//System.out.println(performAStar());
+
 	}
 
 	public void execute(float delta){
@@ -106,40 +120,70 @@ public class Walking implements Action{
 		return list;
 	}
 
-	private int calculateHeuristic(Position position, Position goalPosition){
-		int deltaX = Math.abs(goalPosition.getIntX() - position.getIntX());
-		int deltaY = Math.abs(goalPosition.getIntY() - position.getIntY());
+	private int calculateHeuristic(Pair<Integer, Integer> examinedCoordinates,
+	                               Pair<Integer, Integer> goalCoordinates){
+		int deltaX = Math.abs(examinedCoordinates.getKey() - goalCoordinates.getKey());
+		int deltaY = Math.abs(examinedCoordinates.getValue() - goalCoordinates.getValue());
 		int straight = Math.max(deltaY,deltaX) - Math.min(deltaY, deltaX);
 		int diagonal = Math.min(deltaX, deltaY);
 		return straight + diagonal;
 	}
 
-	private List<Node> checkNode(Node node){
+	private void checkNode(Node node){
 		int positionX, positionY;
 		int[][] deltaNeighbourPositions =
 				{{0,1}, {1,1}, {1,0}, {1,-1}, {0, -1}, {-1,-1}, {-1,0}, {-1, 1} };
 		for (int[] deltaPosition : deltaNeighbourPositions){
-			positionX = node.originX+deltaPosition[0];
-			positionY = node.originY+deltaPosition[1];
+			positionX = node.currentCoordinates.getKey() + deltaPosition[0];
+			positionY = node.currentCoordinates.getValue() + deltaPosition[1] ;
 			if(!level.isInLevel(positionX, positionY)){continue;}
 			if(!level.isTraversable(positionX, positionY)){continue;}
+			if(uncheckedNodes.get(new Pair(positionX,positionY)) == null){continue;}
+			if(checkedNodes.get(new Pair(positionX,positionY)) == null){continue;}
+
+			Pair newCoordinates = new Pair(positionX, positionY);
+			Node newNode = new Node(
+					newCoordinates, node.currentCoordinates,
+					node.cost+1+calculateHeuristic( newCoordinates, goalCoordinates),
+					node.cost +1);
+			uncheckedNodes.put(newCoordinates, newNode);
 
 
 
 		}
-		return new ArrayList<Node>();
+		checkedNodes.put(node.currentCoordinates, node);
+		uncheckedNodes.remove(node.currentCoordinates);
+
+	}
+
+	private ArrayList<Node> performAStar(){
+		while(Collections.min(uncheckedNodes.values()).currentCoordinates != goalCoordinates){
+			Node node = Collections.min(uncheckedNodes.values());
+			checkNode(node);
+		}
+		ArrayList<Node> resultPath= new ArrayList<>();
+		Node endNode=Collections.min(uncheckedNodes.values());
+		Node node= endNode;
+		resultPath.add(endNode);
+
+		return resultPath;
 	}
 
 
 	private class Node implements Comparable<Node>{
 
-		int originX, originY;
+		Pair<Integer, Integer> originCoordinates;
+		Pair<Integer, Integer> currentCoordinates;
 		int score;
+		int cost;
 
-		Node(int score, int originX, int originY){
+		Node(Pair<Integer, Integer> currentCoordinates,
+		     Pair<Integer, Integer> originCoordinates,
+		     int score, int cost){
 			this.score = score;
-			this.originX = originX;
-			this.originY = originY;
+			this.originCoordinates = originCoordinates;
+			this.currentCoordinates = currentCoordinates;
+			this.cost = cost;
 		}
 
 		@Override
