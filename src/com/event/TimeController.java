@@ -16,7 +16,7 @@ public class TimeController {
 	public TimeController(RayHandler rayHandler, Season season){
 		this.rayHandler = rayHandler;
 		this.currentDate = new Date(1, season, 1);
-		this.currentSeconds = 0;
+		this.currentSeconds = Math.round(0.5 * SECONDS_PER_DAY);
 		rayHandler.setShadows(true);
 	}
 
