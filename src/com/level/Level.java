@@ -59,6 +59,22 @@ public class Level {
 		return true;
 	}
 
+	public boolean isInLevel(int x, int y) {
+		if (x > Constants.LEVEL_WIDTH || y > Constants.LEVEL_HEIGHT || x < 0 || y < 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean isInLevel(float x, float y) {
+		if (x > Constants.LEVEL_WIDTH* Constants.TILE_WIDTH ||
+			y > Constants.LEVEL_HEIGHT* Constants.TILE_HEIGHT ||
+			x < 0 || y < 0) {
+			return false;
+		}
+		return true;
+	}
+
 	public void setTraversable(int x, int y, int z, boolean bool) {
 		traversableMap[x][y].setTraversable(z, bool);
 	}

@@ -31,7 +31,7 @@ public class ObjectCreator {
 	//creates object of type at given position
 	public void createObject(int x, int y, String type) {
 		//check if position is in level
-		if (x > Constants.LEVEL_WIDTH || y > Constants.LEVEL_HEIGHT || x < 0 || y < 0) {
+		if (!level.isInLevel(x,y)) {
 			Gdx.app.debug(this.getClass().getName(), type + " " + x + ", " + y + ": assigned object position is out of level area");
 			return;
 		}
@@ -64,7 +64,7 @@ public class ObjectCreator {
 	//checks if object is placeable at given position
 	private boolean isPlaceable(int[][] blockedArea, int x, int y) {
 		//check if position is in game area
-		if (x > Constants.LEVEL_WIDTH || y > Constants.LEVEL_HEIGHT || x < 0 || y < 0) {
+		if (!level.isInLevel(x,y)) {
 			Gdx.app.debug(this.getClass().getName(), x + ", " + y + ": position is out of level area");
 			return false;
 		}
