@@ -4,11 +4,9 @@ import com.level.Level;
 import com.level.Position;
 import com.person.Person;
 import com.person.ViewDirection;
+import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class Walking implements Action{
 	private Person person;
@@ -16,13 +14,19 @@ public class Walking implements Action{
 	private List<Position> plannedRoute;
 	private ListIterator<Position> iterator;
 	private Level level;
+	private Map<Pair<Integer,Integer>, Node> uncheckedNodes;
+	private Map<Pair<Integer,Integer>, Node> checkedNodes ;
 
-	public Walking(Person person, Position goalPosition, Level level) {
+	public Walking(Person person, Position finalGoalPosition, Level level) {
 		this.person = person;
 		this.level = level;
-		this.plannedRoute = calculatePlannedRoute(goalPosition);
+		this.plannedRoute = calculatePlannedRoute(finalGoalPosition);
 		this.iterator = plannedRoute.listIterator();
 		this.currentGoalPosition = iterator.next();
+		this.uncheckedNodes = new HashMap<>();
+		this.checkedNodes = new HashMap<>();
+		this.uncheckedNodes.put(new Pair(0,0), new Node(0,0,0));
+		//System.out.println(Collections.min(uncheckedNodes.values())  + " 2");
 	}
 
 	public void execute(float delta){
@@ -99,7 +103,6 @@ public class Walking implements Action{
 	public List<Position> calculatePlannedRoute(Position goalPosition) {
 		List<Position> list = new LinkedList<>();
 		list.add(goalPosition);
-		list.add(Position.getRandomPosition());
 		return list;
 	}
 
@@ -116,9 +119,11 @@ public class Walking implements Action{
 		int[][] deltaNeighbourPositions =
 				{{0,1}, {1,1}, {1,0}, {1,-1}, {0, -1}, {-1,-1}, {-1,0}, {-1, 1} };
 		for (int[] deltaPosition : deltaNeighbourPositions){
-			positionX = node.position.getIntX()+deltaPosition[0];
-			positionY = node.position.getIntY()+deltaPosition[1];
+			positionX = node.originX+deltaPosition[0];
+			positionY = node.originY+deltaPosition[1];
+			if(!level.isInLevel(positionX, positionY)){continue;}
 			if(!level.isTraversable(positionX, positionY)){continue;}
+
 
 
 		}
@@ -126,11 +131,20 @@ public class Walking implements Action{
 	}
 
 
-	private class Node{
-		Position position;
-		Position originPosition;
+	private class Node implements Comparable<Node>{
+
+		int originX, originY;
 		int score;
+
+		Node(int score, int originX, int originY){
+			this.score = score;
+			this.originX = originX;
+			this.originY = originY;
+		}
+
+		@Override
+		public int compareTo(Node node) {
+			return Integer.compare( this.score, node.score);
+		}
 	}
-
-
 }
