@@ -9,7 +9,6 @@ import com.person.Person;
 import java.util.Random;
 
 public class ActiveScheduler implements Scheduler {
-	private static Scheduler scheduler;
 	private TimeController timeController;
 	private Level level;
 
