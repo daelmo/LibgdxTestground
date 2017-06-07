@@ -60,7 +60,7 @@ public class Level {
 	}
 
 	public boolean isInLevel(int x, int y) {
-		if (x > Constants.LEVEL_WIDTH || y > Constants.LEVEL_HEIGHT || x < 0 || y < 0) {
+		if (x >= Constants.LEVEL_WIDTH || y >= Constants.LEVEL_HEIGHT || x < 0 || y < 0) {
 			return false;
 		}
 		return true;
