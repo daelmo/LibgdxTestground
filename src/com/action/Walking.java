@@ -116,12 +116,9 @@ public class Walking implements Action{
 	}
 
 	public List<Position> calculatePlannedRoute(Position goalPosition) {
-		ArrayList<Node> points = performAStar();
-
-
-		List<Position> list = new LinkedList<>();
-		list.add(goalPosition);
-		return list;
+		LinkedList<Position> points = performAStar();
+		System.out.println(points);
+		return points;
 	}
 
 	private int calculateHeuristic(Pair<Integer, Integer> examinedCoordinates,
@@ -160,18 +157,24 @@ public class Walking implements Action{
 
 	}
 
-	private ArrayList<Node> performAStar(){
-
-
-		while(((Collections.min(uncheckedNodes.values())).currentCoordinates != goalCoordinates)){
+	private LinkedList<Position> performAStar(){
+		while((
+				(Collections.min(uncheckedNodes.values())).currentCoordinates.getKey() != goalCoordinates.getKey()) &&
+				(Collections.min(uncheckedNodes.values())).currentCoordinates.getValue() != goalCoordinates.getValue()){
 			Node node = Collections.min(uncheckedNodes.values());
 			checkNode(node);
 		}
-		ArrayList<Node> resultPath= new ArrayList<>();
+		LinkedList<Position> resultPath= new LinkedList<>();
 		Node endNode=Collections.min(uncheckedNodes.values());
 		Node node= endNode;
-		resultPath.add(endNode);
-
+		while (node != null){
+			resultPath.add(new Position(
+					node.currentCoordinates.getKey() * Constants.TILE_WIDTH,
+					node.currentCoordinates.getValue() * Constants.TILE_HEIGHT)) ;
+			node = checkedNodes.get(node.originCoordinates);
+		}
+		//resultPath.remove(resultPath.size() -1);
+		Collections.reverse(resultPath);
 		return resultPath;
 	}
 
