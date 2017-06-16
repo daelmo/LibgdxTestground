@@ -50,6 +50,8 @@ public class Position {
 		return this.x + " " + this.y;
 	}
 
+	public String toStringInt(){return getIntX() + " " + getIntY();}
+
 	// stop action when true, go on when false
 	public boolean compareTo(Position position) {
 		if (Math.abs(this.x - position.x) > 3.9f) return false;
