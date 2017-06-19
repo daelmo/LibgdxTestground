@@ -15,40 +15,28 @@ public class Walking implements Action{
 	private List<Position> plannedRoute;
 	private ListIterator<Position> iterator;
 	private Level level;
-	private Pair<Integer,Integer> startCoorinates, goalCoordinates;
-	private Map<Pair<Integer,Integer>, Node> uncheckedNodes;
-	private Map<Pair<Integer,Integer>, Node> checkedNodes ;
+	private Pair<Integer,Integer> startCoordinates, goalCoordinates;
 
 	public Walking(Person person, Position finalGoalPosition, Level level) {
 		this.person = person;
 		this.level = level;
 
-		this.uncheckedNodes = new HashMap<>();
-		this.checkedNodes = new HashMap<>();
-		this.startCoorinates=new Pair<Integer,Integer>(
+
+		this.startCoordinates=new Pair<Integer,Integer>(
 				person.getPosition().getIntX() / Constants.TILE_WIDTH,
 				person.getPosition().getIntY() / Constants.TILE_HEIGHT);
 		this.goalCoordinates=new Pair<Integer, Integer>(
-				(int) finalGoalPosition.getIntX() / Constants.TILE_WIDTH,
+				finalGoalPosition.getIntX() / Constants.TILE_WIDTH,
 				finalGoalPosition.getIntY() / Constants.TILE_HEIGHT);
-		this.uncheckedNodes.put(
-				startCoorinates,
-				new Node(startCoorinates,
-						null,
-						calculateHeuristic(startCoorinates, goalCoordinates),
-						0 ));
 		this.plannedRoute = calculatePlannedRoute(finalGoalPosition);
 		this.iterator = plannedRoute.listIterator();
 		this.currentGoalPosition = iterator.next();
-
-
 	}
 
 	public void execute(float delta){
 		if(currentGoalPosition.compareTo(person.getPosition())){
 			currentGoalPosition = iterator.next();
 		}
-
 
 		float[] steps = calculateStep(currentGoalPosition);
 		calculateViewDirection(currentGoalPosition);
@@ -116,88 +104,9 @@ public class Walking implements Action{
 	}
 
 	public List<Position> calculatePlannedRoute(Position goalPosition) {
-		LinkedList<Position> points = performAStar();
-		System.out.println(points);
+		RouteCalculator routeCalculator = new RouteCalculator(level);
+		LinkedList<Position> points = routeCalculator.performAStar(startCoordinates, goalCoordinates);
 		return points;
 	}
 
-	private int calculateHeuristic(Pair<Integer, Integer> examinedCoordinates,
-	                               Pair<Integer, Integer> goalCoordinates){
-		int deltaX = Math.abs(examinedCoordinates.getKey() - goalCoordinates.getKey());
-		int deltaY = Math.abs(examinedCoordinates.getValue() - goalCoordinates.getValue());
-		int straight = Math.max(deltaY,deltaX) - Math.min(deltaY, deltaX);
-		int diagonal = Math.min(deltaX, deltaY);
-		return straight + diagonal;
-	}
-
-	private void checkNode(Node node){
-		int positionX, positionY;
-		int[][] deltaNeighbourPositions =
-				{{0,1}, {1,1}, {1,0}, {1,-1}, {0, -1}, {-1,-1}, {-1,0}, {-1, 1} };
-		for (int[] deltaPosition : deltaNeighbourPositions){
-			positionX = node.currentCoordinates.getKey() + deltaPosition[0];
-			positionY = node.currentCoordinates.getValue() + deltaPosition[1] ;
-			if(!level.isInLevel(positionX, positionY)){continue;}
-			if(!level.isTraversable(positionX, positionY)){continue;}
-			if(uncheckedNodes.get(new Pair(positionX,positionY)) != null){continue;}
-			if(checkedNodes.get(new Pair(positionX,positionY)) != null){continue;}
-
-			Pair newCoordinates = new Pair(positionX, positionY);
-			Node newNode = new Node(
-					newCoordinates, node.currentCoordinates,
-					node.cost+1+calculateHeuristic( newCoordinates, goalCoordinates),
-					node.cost +1);
-			uncheckedNodes.put(newCoordinates, newNode);
-
-
-
-		}
-		checkedNodes.put(node.currentCoordinates, node);
-		uncheckedNodes.remove(node.currentCoordinates);
-
-	}
-
-	private LinkedList<Position> performAStar(){
-		while((
-				(Collections.min(uncheckedNodes.values())).currentCoordinates.getKey() != goalCoordinates.getKey()) &&
-				(Collections.min(uncheckedNodes.values())).currentCoordinates.getValue() != goalCoordinates.getValue()){
-			Node node = Collections.min(uncheckedNodes.values());
-			checkNode(node);
-		}
-		LinkedList<Position> resultPath= new LinkedList<>();
-		Node endNode=Collections.min(uncheckedNodes.values());
-		Node node= endNode;
-		while (node != null){
-			resultPath.add(new Position(
-					node.currentCoordinates.getKey() * Constants.TILE_WIDTH,
-					node.currentCoordinates.getValue() * Constants.TILE_HEIGHT)) ;
-			node = checkedNodes.get(node.originCoordinates);
-		}
-		//resultPath.remove(resultPath.size() -1);
-		Collections.reverse(resultPath);
-		return resultPath;
-	}
-
-
-	private class Node implements Comparable<Node>{
-
-		Pair<Integer, Integer> originCoordinates;
-		Pair<Integer, Integer> currentCoordinates;
-		int score;
-		int cost;
-
-		Node(Pair<Integer, Integer> currentCoordinates,
-		     Pair<Integer, Integer> originCoordinates,
-		     int score, int cost){
-			this.score = score;
-			this.originCoordinates = originCoordinates;
-			this.currentCoordinates = currentCoordinates;
-			this.cost = cost;
-		}
-
-		@Override
-		public int compareTo(Node node) {
-			return Integer.compare( this.score, node.score);
-		}
-	}
 }
