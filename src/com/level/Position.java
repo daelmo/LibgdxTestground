@@ -47,10 +47,8 @@ public class Position {
 
 	@Override
 	public String toString() {
-		return this.x + " " + this.y;
+		return getIntX() + " " + getIntY();
 	}
-
-	public String toStringInt(){return getIntX() + " " + getIntY();}
 
 	// stop action when true, go on when false
 	public boolean compareTo(Position position) {
