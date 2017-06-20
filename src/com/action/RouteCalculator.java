@@ -45,7 +45,26 @@ public class RouteCalculator {
 					node.currentCoordinates.getValue() * Constants.TILE_HEIGHT)) ;
 			node = checkedNodes.get(node.originCoordinates);
 		}
-		//resultPath.remove(resultPath.size() -1);
+
+		Position oldPos = null;
+		Float oldSlope = null
+		for(Position newPos : resultPath){
+			if(oldPos == null){
+				oldPos = newPos;
+				continue;
+			}
+			if(oldSlope == null){
+				oldSlope = calculateSlope(oldPos, newPos);
+				oldPos = newPos;
+				continue;
+			}
+			if(oldSlope == calculateSlope(oldPos, newPos)){
+				resultPath.remove(oldPos);
+			}
+			oldPos = newPos;
+			oldSlope = calculateSlope(oldPos, newPos);
+		}
+
 		Collections.reverse(resultPath);
 		return resultPath;
 	}
