@@ -63,4 +63,12 @@ public class Position {
 		int y = random.nextInt(Constants.TILE_HEIGHT *10) +1;
 		return new Position(x,y);
 	}
+
+	public float calculateSlope(Position position){
+		float deltaX = this.getFloatX() - position.getFloatX();
+		float deltaY = this.getFloatY() - position.getFloatY();
+
+		float slope = deltaY/deltaX;
+		return slope;
+	}
 }
