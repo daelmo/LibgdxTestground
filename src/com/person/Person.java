@@ -22,7 +22,6 @@ public class Person extends Actor {
 	private PersonState personState = PersonState.active;
 	public Statistic statistic;
 	private PersonGrowth growth;
-	private Stage stage;
 	private Scheduler scheduler;
 	private final float shakeAmplitude = 5.0f;
 	private float rotation = 0;
@@ -31,7 +30,7 @@ public class Person extends Actor {
 	private Gender gender;
 
 
-	public Person(Stage stage, PersonGrowth growth) {
+	public Person(PersonGrowth growth) {
 		this.growth = growth;
 	}
 
@@ -91,14 +90,9 @@ public class Person extends Actor {
 		this.personState = personState;
 	}
 
-	public void setStage(Stage stage) {
-		this.stage = stage;
-	}
-
 	public void setScheduler(Scheduler scheduler) {
 		this.scheduler = scheduler;
 	}
-
 
 	public PersonState getPersonState() {
 		return personState;

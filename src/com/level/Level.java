@@ -7,22 +7,20 @@ import com.game.Constants;
 import com.object.StaticObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Level {
 	private static Level instance = null;
-
-	public Group floorGroup = new Group();
-	public Group personGroup = new Group();
-	public Group objectGroup = new Group();
+	public Group[] objectGroup ;
 	public Tile[][] traversableMap;
-	public HashMap<StaticObject,ArrayList<StaticObject>> objectPlacement = new HashMap<>();
 
 	protected Level() {
+		objectGroup= new Group[Constants.LEVEL_HEIGHT];
+		Arrays.fill(objectGroup, new Group());
+
 		generateTraversableMap();
 		generateFloor();
-
-
 	}
 
 	public static Level getInstance() {
@@ -33,15 +31,9 @@ public class Level {
 	}
 
 	public void addToStage(Stage stage) {
-		stage.addActor(floorGroup);
-		stage.addActor(objectGroup);
-		stage.addActor(personGroup);
-	}
-
-	public void removeFromStage() {
-		personGroup.remove();
-		objectGroup.remove();
-		floorGroup.remove();
+		for(int i=objectGroup.length - 1; i >= 0;i--){
+			stage.addActor(objectGroup[i]);
+		}
 	}
 
 	public boolean isTraversable(int x, int y) {
@@ -93,7 +85,7 @@ public class Level {
 	private void generateFloor(){
 		for (int x = 0; x < Constants.LEVEL_WIDTH; x++) {
 			for (int y = 0; y < Constants.LEVEL_HEIGHT; y++) {
-				floorGroup.addActor(new Floor(x, y));
+				objectGroup[y].addActor(new Floor(x, y));
 			}
 		}
 	}

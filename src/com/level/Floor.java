@@ -7,7 +7,6 @@ import com.game.Constants;
 public class Floor extends Actor {
 	public final int posX, posY;
 	public MapSprite sprite;
-	private int zIndex = Constants.FLOOR_ZINDEX;
 
 	public Floor(int posX, int posY) {
 		this.posX = posX;
@@ -19,7 +18,6 @@ public class Floor extends Actor {
 		sprite.setPosition(
 				posX * Constants.TILE_WIDTH,
 				posY * Constants.TILE_HEIGHT);
-		sprite.setZIndex(zIndex);
 	}
 
 	@Override

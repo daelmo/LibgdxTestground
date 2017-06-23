@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.TimeController;
 import com.game.ActorFont;
+import com.game.Constants;
 import com.level.Level;
 import com.level.Position;
 
@@ -24,7 +25,7 @@ public class PersonBuilder {
 	}
 
 	public void generateActivePerson(PersonGrowth growth){
-		Person person = new Person(stage, growth);
+		Person person = new Person(growth);
 
 		String name= nameGen.generatePersonName(Gender.MALE);
 		person.setName(name);
@@ -38,7 +39,7 @@ public class PersonBuilder {
 		person.setBirthday(timeController.generateBirthday(growth));
 		person.setScheduler(new ActiveScheduler(timeController, level));
 
-		stage.addActor(person);
+		level.objectGroup[person.getPosition().getIntY() / Constants.TILE_HEIGHT].addActor(person);
 		stage.addActor(person.getPrintName());
 	}
 }

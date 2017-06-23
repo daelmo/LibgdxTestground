@@ -14,7 +14,6 @@ public class StaticObject extends Actor {
 	private MapSprite sprite;
 	private int posX, posY;
 	private int[][] blockedArea;
-	private int zIndex = Constants.STATIC_OBJECT_ZINDEX;
 
 	public StaticObject createCopyAt(int x, int y){
 		StaticObject object = new StaticObject();
@@ -34,7 +33,6 @@ public class StaticObject extends Actor {
 		sprite = new MapSprite(spritePath, imageWidth, imageHeight);
 		sprite.setPosition(posX * Constants.TILE_WIDTH, posY * Constants.TILE_HEIGHT);
 		sprite.setOrigin(originX,originY);
-		sprite.setZIndex(zIndex);
 		sprite.draw(batch);
 	}
 
