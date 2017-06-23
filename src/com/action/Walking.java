@@ -34,7 +34,7 @@ public class Walking implements Action{
 	}
 
 	public void execute(float delta){
-		if(currentGoalPosition.compareTo(person.getPosition())){
+		if(currentGoalPosition.equals(person.getPosition())){
 			currentGoalPosition = iterator.next();
 		}
 
@@ -47,7 +47,8 @@ public class Walking implements Action{
 
 	//becomes true when position is reached
 	public boolean checkCondition(){
-		return currentGoalPosition.compareTo(person.getPosition()) && !iterator.hasNext();
+		return currentGoalPosition.equals(person.getPosition())
+				&& !iterator.hasNext();
 	}
 
 	@Override
@@ -83,7 +84,7 @@ public class Walking implements Action{
 		deltaX = currentGoalPosition.getFloatX() - person.getPosition().getFloatX();
 		deltaY = currentGoalPosition.getFloatY() - person.getPosition().getFloatY();
 
-		slope = deltaY/deltaX;
+		slope = currentGoalPosition.calculateSlope(person.getPosition());
 
 		if(deltaY >0){
 			person.setViewDirection(ViewDirection.top);

@@ -5,10 +5,7 @@ import com.level.Level;
 import com.level.Position;
 import javafx.util.Pair;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 
 public class RouteCalculator {
@@ -46,24 +43,33 @@ public class RouteCalculator {
 			node = checkedNodes.get(node.originCoordinates);
 		}
 
-		Position oldPos = null;
-		Float oldSlope = null
-		for(Position newPos : resultPath){
-			if(oldPos == null){
-				oldPos = newPos;
+		ListIterator<Position> listIterator = resultPath.listIterator();
+		Position previousPosition = null, newPosition;
+		Float previousSlope = null;
+		List<Position> removalList = new LinkedList<Position>();
+
+		while(listIterator.hasNext()){
+			newPosition = listIterator.next();
+
+			if(previousPosition == null){
+				previousPosition = newPosition;
 				continue;
 			}
-			if(oldSlope == null){
-				oldSlope = calculateSlope(oldPos, newPos);
-				oldPos = newPos;
+			if(previousSlope == null){
+				previousSlope = previousPosition.calculateSlope( newPosition);
+				previousPosition = newPosition;
 				continue;
 			}
-			if(oldSlope == calculateSlope(oldPos, newPos)){
-				resultPath.remove(oldPos);
+			if(previousSlope.compareTo(previousPosition.calculateSlope(newPosition)) <= 0.1){
+				removalList.add(previousPosition);
 			}
-			oldPos = newPos;
-			oldSlope = calculateSlope(oldPos, newPos);
+			previousSlope = previousPosition.calculateSlope(newPosition);
+			previousPosition = newPosition;
 		}
+		for(Position pos : removalList){
+			resultPath.remove(pos);
+		}
+
 
 		Collections.reverse(resultPath);
 		return resultPath;
@@ -123,4 +129,5 @@ public class RouteCalculator {
 			return Integer.compare( this.score, node.score);
 		}
 	}
+
 }
