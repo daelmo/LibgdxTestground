@@ -4,7 +4,7 @@ import com.game.Constants;
 
 import java.util.Random;
 
-public class Position {
+public class Position implements Comparable<Position>{
 	private float x;
 	private float y;
 
@@ -51,10 +51,16 @@ public class Position {
 	}
 
 	// stop action when true, go on when false
-	public boolean compareTo(Position position) {
+	public boolean equals(Position position) {
 		if (Math.abs(this.x - position.x) > 3.9f) return false;
 		if (Math.abs(this.y - position.y) > 3.9f) return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Position position){
+		if( this.equals(position)) return 0;
+		return 1;
 	}
 
 	public static Position getRandomPosition(){
