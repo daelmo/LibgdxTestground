@@ -77,7 +77,7 @@ public class GameScreen implements Screen {
 		objectCreator.createObject(1, 3, "stone");
 		//objectCreator.createObject(3, 3, "stone");
 		objectCreator.createObject(4, 1, "stone");
-		objectCreator.createObject(2, 7, "bush");
+		objectCreator.createObject(2, 7, "pie");
 	}
 
 

@@ -31,5 +31,16 @@
     "blockedArea":[
       [0,0]
     ]
+  },
+  "pie": {
+    "spritePath": "object/pie.png",
+    "imageWidth": 32,
+    "imageHeight": 32,
+    "originX": 32,
+    "originY": 32,
+    "isTraversable": false,
+    "blockedArea":[
+      [0,0]
+    ]
   }
 }
