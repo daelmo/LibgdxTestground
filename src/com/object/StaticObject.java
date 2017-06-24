@@ -26,6 +26,7 @@ public class StaticObject extends Actor {
 		object.blockedArea = this.blockedArea;
 		object.posX = x;
 		object.posY = y;
+		setZIndex(y);
 		return object;
 	}
 

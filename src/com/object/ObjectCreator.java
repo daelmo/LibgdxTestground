@@ -11,13 +11,11 @@ import static com.badlogic.gdx.net.HttpRequestBuilder.json;
 
 public class ObjectCreator {
 	Level level;
-	Stage stage;
 	HashMap<String, StaticObject> templateObjects;
 
 
-	public ObjectCreator(Level level, Stage stage) {
+	public ObjectCreator(Level level) {
 		this.level = level;
-		this.stage = stage;
 		templateObjects = json.fromJson(
 				HashMap.class,
 				StaticObject.class,

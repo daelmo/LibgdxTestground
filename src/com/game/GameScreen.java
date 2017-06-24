@@ -58,7 +58,7 @@ public class GameScreen implements Screen {
 		world = new World(new Vector2(0, -98f), true);
 		rayHandler = new RayHandler(world);
 		timeController = new TimeController(rayHandler, Season.spring);
-		objectCreator = new ObjectCreator(level, stage);
+		objectCreator = new ObjectCreator(level);
 		personBuilder = new PersonBuilder(timeController, stage, main.font, level);
 
 		//initGui
@@ -74,7 +74,10 @@ public class GameScreen implements Screen {
 		objectCreator.createObject(5, 3, "stone");
 		objectCreator.createObject(3, 7, "bush");
 		objectCreator.createObject(2,2,"tree");
-		
+		objectCreator.createObject(1, 3, "stone");
+		//objectCreator.createObject(3, 3, "stone");
+		objectCreator.createObject(4, 1, "stone");
+		objectCreator.createObject(2, 7, "bush");
 	}
 
 

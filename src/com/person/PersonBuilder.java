@@ -26,10 +26,12 @@ public class PersonBuilder {
 
 	public void generateActivePerson(PersonGrowth growth){
 		Person person = new Person(growth);
+		person.setLevel(level);
 
 		String name= nameGen.generatePersonName(Gender.MALE);
 		person.setName(name);
 		person.setPrintName(new ActorFont(font, name, -5, 5));
+
 
 		person.setPersonBody(new PersonBody(growth));
 		person.setStatistic(new Statistic(person));
@@ -39,7 +41,6 @@ public class PersonBuilder {
 		person.setBirthday(timeController.generateBirthday(growth));
 		person.setScheduler(new ActiveScheduler(timeController, level));
 
-		level.objectGroup[person.getPosition().getIntY() / Constants.TILE_HEIGHT].addActor(person);
 		stage.addActor(person.getPrintName());
 	}
 }

@@ -6,12 +6,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.event.Date;
 import com.game.ActorFont;
+import com.game.Constants;
+import com.level.Level;
 import com.level.Position;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Person extends Actor {
 	private String name;
@@ -28,6 +32,8 @@ public class Person extends Actor {
 	private ArrayList<Action> actions = new ArrayList<Action>();
 	private ActorFont printName;
 	private Gender gender;
+	private Level level;
+	private Group group;
 
 
 	public Person(PersonGrowth growth) {
@@ -41,6 +47,7 @@ public class Person extends Actor {
 	public void setPosition(Position position) {
 		this.position = position;
 		this.printName.setPosition(position);
+		setActorGroup(level.objectGroup[position.getIntY() / Constants.TILE_HEIGHT]);
 	}
 
 	public Position getPosition() {
@@ -48,8 +55,24 @@ public class Person extends Actor {
 	}
 
 	public void movePosition(float X, float Y) {
+		int oldYCoordinate = this.getPosition().getIntY();
+
 		this.position.addX(X);
 		this.position.addY(Y);
+
+		int newYCoordinate = this.getPosition().getIntY();
+		if(oldYCoordinate != newYCoordinate){
+			setActorGroup(level.objectGroup[oldYCoordinate / Constants.TILE_HEIGHT]);
+		}
+
+	}
+
+	public void setActorGroup(Group group){
+		if(group != null){
+			group.removeActor(this);
+		}
+		this.group = group;
+		group.addActor(this);
 	}
 
 
@@ -124,6 +147,10 @@ public class Person extends Actor {
 
 	public ActorFont getPrintName(){
 		return printName;
+	}
+
+	public void setLevel(Level level){
+		this.level = level;
 	}
 
 }
