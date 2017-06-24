@@ -4,20 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.game.Constants;
-import com.object.StaticObject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class Level {
 	private static Level instance = null;
-	public Group[] objectGroup ;
+	public Group objectGroup ;
 	public Tile[][] traversableMap;
 
 	protected Level() {
-		objectGroup= new Group[Constants.LEVEL_HEIGHT];
-		Arrays.fill(objectGroup, new Group());
+		objectGroup= new Group();
 
 		generateTraversableMap();
 		generateFloor();
@@ -31,9 +25,7 @@ public class Level {
 	}
 
 	public void addToStage(Stage stage) {
-		for(int i=objectGroup.length - 1; i >= 0;i--){
-			stage.addActor(objectGroup[i]);
-		}
+			stage.addActor(objectGroup);
 	}
 
 	public boolean isTraversable(int x, int y) {
@@ -85,7 +77,7 @@ public class Level {
 	private void generateFloor(){
 		for (int x = 0; x < Constants.LEVEL_WIDTH; x++) {
 			for (int y = 0; y < Constants.LEVEL_HEIGHT; y++) {
-				objectGroup[y].addActor(new Floor(x, y));
+				objectGroup.addActor(new Floor(x, y));
 			}
 		}
 	}

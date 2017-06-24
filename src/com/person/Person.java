@@ -47,7 +47,6 @@ public class Person extends Actor {
 	public void setPosition(Position position) {
 		this.position = position;
 		this.printName.setPosition(position);
-		setActorGroup(level.objectGroup[position.getIntY() / Constants.TILE_HEIGHT]);
 	}
 
 	public Position getPosition() {
@@ -55,24 +54,8 @@ public class Person extends Actor {
 	}
 
 	public void movePosition(float X, float Y) {
-		int oldYCoordinate = this.getPosition().getIntY();
-
 		this.position.addX(X);
 		this.position.addY(Y);
-
-		int newYCoordinate = this.getPosition().getIntY();
-		if(oldYCoordinate != newYCoordinate){
-			setActorGroup(level.objectGroup[oldYCoordinate / Constants.TILE_HEIGHT]);
-		}
-
-	}
-
-	public void setActorGroup(Group group){
-		if(group != null){
-			group.removeActor(this);
-		}
-		this.group = group;
-		group.addActor(this);
 	}
 
 

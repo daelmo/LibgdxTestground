@@ -40,7 +40,7 @@ public class PersonBuilder {
 		person.setPosition(Position.getRandomPosition());
 		person.setBirthday(timeController.generateBirthday(growth));
 		person.setScheduler(new ActiveScheduler(timeController, level));
-
+		level.objectGroup.addActor(person);
 		stage.addActor(person.getPrintName());
 	}
 }

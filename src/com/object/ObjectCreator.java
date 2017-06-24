@@ -56,7 +56,7 @@ public class ObjectCreator {
 					false);
 		}
 		StaticObject object = templateObjects.get(type).createCopyAt(x, y);
-		level.objectGroup[y].addActor(object);
+		level.objectGroup.addActor(object);
 	}
 
 	//checks if object is placeable at given position
