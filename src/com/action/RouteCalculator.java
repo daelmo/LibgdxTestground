@@ -38,39 +38,11 @@ public class RouteCalculator {
 		Node node= Collections.min(uncheckedNodes.values());
 		while (node != null){
 			resultPath.add(new Position(
-					node.currentCoordinates.getKey() * Constants.TILE_WIDTH,
-					node.currentCoordinates.getValue() * Constants.TILE_HEIGHT)) ;
+					node.currentCoordinates.getKey() * Constants.TILE_WIDTH +32,
+					node.currentCoordinates.getValue() * Constants.TILE_HEIGHT+32));
 			node = checkedNodes.get(node.originCoordinates);
 		}
-
-		ListIterator<Position> listIterator = resultPath.listIterator();
-		Position previousPosition = null, newPosition;
-		Float previousSlope = null;
-		List<Position> removalList = new LinkedList<Position>();
-
-		while(listIterator.hasNext()){
-			newPosition = listIterator.next();
-
-			if(previousPosition == null){
-				previousPosition = newPosition;
-				continue;
-			}
-			if(previousSlope == null){
-				previousSlope = previousPosition.calculateSlope( newPosition);
-				previousPosition = newPosition;
-				continue;
-			}
-			if(previousSlope.compareTo(previousPosition.calculateSlope(newPosition)) <= 0.1){
-				removalList.add(previousPosition);
-			}
-			previousSlope = previousPosition.calculateSlope(newPosition);
-			previousPosition = newPosition;
-		}
-		for(Position pos : removalList){
-			resultPath.remove(pos);
-		}
-
-
+		
 		Collections.reverse(resultPath);
 		return resultPath;
 	}
@@ -78,7 +50,7 @@ public class RouteCalculator {
 	private void checkNode(Node node, Pair goalCoordinates){
 		int positionX, positionY;
 		int[][] deltaNeighbourPositions =
-				{{0,1}, {1,1}, {1,0}, {1,-1}, {0, -1}, {-1,-1}, {-1,0}, {-1, 1} };
+				{{0,1}, {1,0}, {0, -1}, {-1,0} };
 		for (int[] deltaPosition : deltaNeighbourPositions){
 			positionX = node.currentCoordinates.getKey() + deltaPosition[0];
 			positionY = node.currentCoordinates.getValue() + deltaPosition[1] ;
@@ -87,7 +59,7 @@ public class RouteCalculator {
 			if(uncheckedNodes.get(new Pair(positionX,positionY)) != null){continue;}
 			if(checkedNodes.get(new Pair(positionX,positionY)) != null){continue;}
 
-			Pair newCoordinates = new Pair(positionX, positionY);
+			Pair newCoordinates = new Pair(positionX , positionY);
 			Node newNode = new Node(
 					newCoordinates, node.currentCoordinates,
 					node.cost+1+calculateHeuristic( newCoordinates, goalCoordinates),
