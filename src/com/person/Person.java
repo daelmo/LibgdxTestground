@@ -93,7 +93,11 @@ public class Person extends Actor {
 	}
 
 	public void setPersonState(PersonState personState) {
+
 		this.personState = personState;
+		if(personState == PersonState.dead){
+			this.printName.changeContent("DEAD");
+		}
 	}
 
 	public void setScheduler(Scheduler scheduler) {

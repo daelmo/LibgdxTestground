@@ -22,6 +22,10 @@ public class ActorFont extends Actor {
 
 	}
 
+	public void changeContent(Object t){
+		this.t = t;
+	}
+
 	@Override
 	public void act(float delta) {
 	}
