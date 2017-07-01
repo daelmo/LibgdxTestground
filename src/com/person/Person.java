@@ -4,6 +4,7 @@ import com.action.Action;
 import com.action.Scheduler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -34,6 +35,7 @@ public class Person extends Actor {
 	private Gender gender;
 	private Level level;
 	private Group group;
+	private BitmapFont font;
 
 
 	public Person(PersonGrowth growth) {
@@ -93,11 +95,7 @@ public class Person extends Actor {
 	}
 
 	public void setPersonState(PersonState personState) {
-
 		this.personState = personState;
-		if(personState == PersonState.dead){
-			this.printName.changeContent("DEAD");
-		}
 	}
 
 	public void setScheduler(Scheduler scheduler) {
