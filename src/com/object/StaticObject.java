@@ -3,9 +3,10 @@ package com.object;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.game.Constants;
+import com.game.Selectable;
 import com.level.MapSprite;
 
-public class StaticObject extends Actor {
+public class StaticObject extends Actor implements Selectable{
 
 	private int imageWidth, imageHeight;
 	private int originX, originY;
@@ -15,7 +16,7 @@ public class StaticObject extends Actor {
 	private int posX, posY;
 	private int[][] blockedArea;
 
-	public StaticObject createCopyAt(int x, int y){
+	public StaticObject createCopyAt(int X, int Y){
 		StaticObject object = new StaticObject();
 		object.spritePath = this.spritePath;
 		object.imageWidth = this.imageWidth;
@@ -24,8 +25,8 @@ public class StaticObject extends Actor {
 		object.originY = this.originY;
 		object.isTraversable = this.isTraversable;
 		object.blockedArea = this.blockedArea;
-		object.posX = x;
-		object.posY = y;
+		object.posX = X;
+		object.posY = Y;
 		return object;
 	}
 

@@ -33,6 +33,7 @@ public class GameScreen implements Screen {
 	public OrthographicCamera camera;
 	public GameInputProcessor gameInputProcessor;
 	public CustomScreenViewport viewport;
+	public Selectable selectedItemTemplate;
 
 	public TimeBox timeBox;
 
@@ -59,6 +60,7 @@ public class GameScreen implements Screen {
 		rayHandler = new RayHandler(world);
 		timeController = new TimeController(rayHandler, Season.spring);
 		objectCreator = new ObjectCreator(level);
+		selectedItemTemplate = objectCreator.getTemplate("pie");
 		personBuilder = new PersonBuilder(timeController, stage, main.font, level);
 
 		//initGui
@@ -120,6 +122,9 @@ public class GameScreen implements Screen {
 		}
 		if (gameInputProcessor.keyUpPressed) {
 			viewport.translateUp();
+		}
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+
 		}
 	}
 

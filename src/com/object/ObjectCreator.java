@@ -59,6 +59,11 @@ public class ObjectCreator {
 		level.objectGroup.addActor(object);
 	}
 
+	public StaticObject getTemplate(String id){
+		return templateObjects.get(id);
+
+	}
+
 	//checks if object is placeable at given position
 	private boolean isPlaceable(int[][] blockedArea, int x, int y) {
 		//check if position is in game area
