@@ -95,4 +95,15 @@ public class Level {
 		}
 		System.out.print("\n");
 	}
+
+	public void blockArea(int[][] blockedArea, int X, int Y){
+		for (int i = 0; i < blockedArea.length; i++) {
+			setTraversable(
+					blockedArea[i][0] + X,
+					blockedArea[i][1] + Y,
+					Constants.STATIC_OBJECT_ZINDEX,
+					false);
+		}
+
+	}
 }
