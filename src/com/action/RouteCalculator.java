@@ -42,7 +42,6 @@ public class RouteCalculator {
 					node.currentCoordinates.getValue() * Constants.TILE_HEIGHT+32));
 			node = checkedNodes.get(node.originCoordinates);
 		}
-		
 		Collections.reverse(resultPath);
 		return resultPath;
 	}
