@@ -40,7 +40,6 @@
     "originY": 32,
     "isTraversable": false,
     "blockedArea":[
-      [0,0]
     ]
   }
 }
