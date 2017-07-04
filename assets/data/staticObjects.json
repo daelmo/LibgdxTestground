@@ -16,6 +16,8 @@
     "imageHeight": 64,
     "originX": 32,
     "originY": 32,
+    "offsetX": 0,
+    "offsetY": 0,
     "isTraversable": true,
     "blockedArea":[
        [0,0]
@@ -27,6 +29,8 @@
     "imageHeight": 256,
     "originX": 96,
     "originY": 40,
+    "offsetX": -64,
+    "offsetY": 0,
     "isTraversable": false,
     "blockedArea":[
       [0,0]
@@ -38,6 +42,8 @@
     "imageHeight": 32,
     "originX": 32,
     "originY": 32,
+    "offsetX": 0,
+    "offsetY": 0,
     "isTraversable": false,
     "blockedArea":[
     ]
