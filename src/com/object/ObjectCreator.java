@@ -55,7 +55,7 @@ public class ObjectCreator {
 					Constants.STATIC_OBJECT_ZINDEX,
 					false);
 		}
-		StaticObject object = templateObjects.get(type).createCopyAt(x, y);
+		StaticObject object = templateObjects.get(type).createDeepCopyAt(x, y);
 		level.objectGroup.addActor(object);
 	}
 
